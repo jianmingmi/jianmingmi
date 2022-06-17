@@ -1,10 +1,9 @@
-Hi there 👋
-I work as a full-time software engineer.
 
-I use GitHub as a platform to empower developers and for experimenting with the latest tech.
+- Hi there 👋
+- I work as a full-time software engineer.
 
 
-<img align="right" src="https://github-readme-stats.vercel.app/api?username=jianmingmi&show_icons=true">
+<img src="https://github-readme-stats.vercel.app/api?username=jianmingmi&show_icons=true">
 
 
 <!---
