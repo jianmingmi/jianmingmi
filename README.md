@@ -1,10 +1,7 @@
-## asdf
+Hi there 👋
+I work as a full-time software engineer.
 
-- asdf
-- asdf
-- as
-- df
-- sdf
+I use GitHub as a platform to empower developers and for experimenting with the latest tech.
 
 
 <img align="right" src="https://github-readme-stats.vercel.app/api?username=jianmingmi&show_icons=true">
