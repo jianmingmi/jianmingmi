@@ -16,7 +16,7 @@
 <meta property="og:description" content="git merge策略解析">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-28T14:20:18.200Z">
+<meta property="article:modified_time" content="2022-06-28T14:55:31.475Z">
 <meta property="article:author" content="mijm">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="merge">
@@ -198,7 +198,19 @@
 <h3 id="resolve-1"><a href="#resolve-1" class="headerlink" title="resolve"></a>resolve</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-X ours（使用我们的）</span><br><span class="line">-X theirs（使用他们的）</span><br><span class="line">-X ignore-space-change（空格改动的话就忽略）</span><br><span class="line">-X find-renames=0（值越小，使文件越相同）</span><br><span class="line">-X diff-algorithm=&#123;patience|minimal|histogram|myers&#125;（指定一个差异算法，myers是默认的，具体算法差异可通过man手册来查看）</span><br><span class="line">    此策略的名称叫 “耐心”，因为 git 将话费更多的时间来进行合并一些看起来不怎么重要的行，合并的结果也更加准确。当然，使用的算法是 recursive 即递归三路合并算法</span><br></pre></td></tr></table></figure>
 
 <h2 id="git-merge其他参数"><a href="#git-merge其他参数" class="headerlink" title="git merge其他参数"></a>git merge其他参数</h2><p><code>git merge BRANCH_NAME</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--no-ff               强行关掉fast-forward，所以在使用这种方式后，分支合并后会生成一个新的commit（默认--ff）</span><br><span class="line">--no-edit             不进入编辑页面，直接提交</span><br><span class="line">--squash              创建一个单独的提交而不是做一次合并</span><br><span class="line">--stat                show a diffstat at the end of the merge</span><br><span class="line">--summary             (synonym to --stat)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>no-ff               强行关掉fast-forward，所以在使用这种方式后，分支合并后会生成一个新的commit（默认–ff）</li>
+<li>no-edit             不进入编辑页面，直接提交</li>
+<li>squash              创建一个单独的提交而不是做一次合并</li>
+<li>stat                show a diffstat at the end of the merge</li>
+<li>summary             (synonym to –stat)</li>
+</ul>
+<h2 id="git-merge方案"><a href="#git-merge方案" class="headerlink" title="git merge方案"></a>git merge方案</h2><ul>
+<li>可使用<code>git merge-base -a [branch1] [branch2]</code>查看两个分支或节点共同祖先，可提炼出需要合入的修改有哪些</li>
+<li>使用<code>git merge --no-ff -s recursive -X ignore-space-change  -m &quot;Upgrade from xxx&quot; --no-edit -q [BRANCH_NAME]</code>合入代码</li>
+<li>使用<code>git ls-files -u</code>查看未合并的文件</li>
+<li>提交到审查系统修改后统一合入</li>
+</ul>
 
       
 
@@ -524,7 +536,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">坐标南京&lt;br&gt;爱玩玩、瞎搞搞</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">坐标南京&lt;br&gt;爱玩玩、瞎搞搞&lt;br&gt;知识分享、经验分享</div>
   	  	
     	</section>
     
