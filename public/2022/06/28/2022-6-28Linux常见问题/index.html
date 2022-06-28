@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://www.mijm.site">
-  <title>Archives: 2017 | Mijm Blog</title>
+  <title>Linux常见问题 | Mijm Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="this is blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mijm Blog">
-<meta property="og:url" content="https://www.mijm.site/archives/2017/index.html">
+  <meta name="description" content="Linux常见问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常见问题">
+<meta property="og:url" content="https://www.mijm.site/2022/06/28/2022-6-28Linux%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Mijm Blog">
-<meta property="og:description" content="this is blog">
+<meta property="og:description" content="Linux常见问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-28T15:35:47.633Z">
 <meta property="article:author" content="mijm">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Mijm Blog" type="application/atom+xml">
@@ -142,60 +145,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2022-6-28Linux常见问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/27/2017-9-27%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E6%94%BB%E5%87%BB%E5%8B%92%E7%B4%A2%E6%A1%88%E4%BE%8B/" class="archive-article-date">
-  	<time datetime="2017-09-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/27/2017-9-27%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E6%94%BB%E5%87%BB%E5%8B%92%E7%B4%A2%E6%A1%88%E4%BE%8B/">服务器被攻击勒索案例</a>
+    <h1 class="article-title" itemprop="name">
+      Linux常见问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/06/28/2022-6-28Linux%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2022-06-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux常见问题</p>
+<span id="more"></span>
+
+<h2 id="源处理"><a href="#源处理" class="headerlink" title="源处理"></a>源处理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br><span class="line">sudo apt update</span><br><span class="line"></span><br><span class="line">阿里镜像站：https://mirrors.aliyun.com/ubuntu-releases</span><br><span class="line">网易镜像站：http://tel.mirrors.163.com/</span><br><span class="line">中科大：http://mirrors.ustc.edu.cn/ubuntu-releases</span><br><span class="line">浙大：http://mirrors.zju.edu.cn/ubuntu-releases</span><br><span class="line">清华镜像站：https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases</span><br><span class="line">清华帮助：https://mirrors.tuna.tsinghua.edu.cn/help</span><br><span class="line">替换为阿里源：sudo sed -i &#x27;s/mirrors.aliyun.com/mirrors.tuna.tsinghua.edu.cn/g&#x27; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">ubuntu各版本：</span><br><span class="line">    14：trusty</span><br><span class="line">    16：xenial</span><br><span class="line">    18：bionic</span><br><span class="line">    20：focal</span><br><span class="line">    22：jammy</span><br><span class="line"></span><br><span class="line">ubuntu18</span><br><span class="line">    deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">    deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">    deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">    deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">    deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">GPG error: The following signatures couldn&#x27;t be verified because the public key is not available</span><br><span class="line">    sudo gpg --keyserver keyserver.ubuntu.com --recv 5523BAEEB01FA116</span><br><span class="line">    sudo gpg --export --armor 5523BAEEB01FA116 | sudo apt-key add -</span><br><span class="line">    sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">ssh -vT -p port user@ip（ssh登录，-v：详细信息，-T：测试，-t：开启伪终端，-tt：强制开启伪终端）</span><br><span class="line">ssh-copy-id -p port user@ip（ssh免密登录）</span><br><span class="line">ssh-keygen -f &quot;/home/jmm/.ssh/known_hosts&quot; -R [10.20.33.43]:10025（ssh更新known_hosts）</span><br><span class="line">ssh -vvv（调试）</span><br><span class="line"></span><br><span class="line">ssh免密登录</span><br><span class="line">    vim ~/.ssh/authorized_keys</span><br><span class="line">    chmod 600 ~/.ssh/authorized_keys</span><br><span class="line">    公钥拷贝到里面</span><br><span class="line"></span><br><span class="line">指定秘钥：</span><br><span class="line">    vim ~/.ssh/config</span><br><span class="line">    chmod 600 ~/.ssh/config</span><br><span class="line">        Host man1</span><br><span class="line">            HostName 192.168.2.18</span><br><span class="line">            IdentityFile ~/.ssh/id_rsa</span><br><span class="line">            User root</span><br><span class="line">            Port 22</span><br><span class="line"></span><br><span class="line">使ssh生效：</span><br><span class="line">    eval &quot;$(ssh-agent -s)&quot;</span><br><span class="line">    ssh-add</span><br><span class="line">    ssh-agent bash</span><br><span class="line"></span><br><span class="line">Their offer:diffie-hellman-group1-sha1问题：</span><br><span class="line">    vim ~/.ssh/config</span><br><span class="line">    Host *</span><br><span class="line">        StrictHostKeyChecking no</span><br><span class="line">        KexAlgorithms +diffie-hellman-group1-sha1</span><br><span class="line"></span><br><span class="line">启用ssh-rsa：</span><br><span class="line">    vim ~/.ssh/config</span><br><span class="line">    Host *</span><br><span class="line">        HostKeyAlgorithms +ssh-rsa</span><br><span class="line">        PubkeyAcceptedKeyTypes +ssh-rsa</span><br><span class="line"></span><br><span class="line">修改22端口：</span><br><span class="line">    sudo vim /etc/ssh/sshd_config</span><br><span class="line">        修改Port 22为65534以下即可</span><br><span class="line">    sudo /etc/init.d/ssh restart #重启ssh</span><br><span class="line"></span><br><span class="line">允许远程登录：</span><br><span class="line">    sudo vim /etc/ssh/sshd_config</span><br><span class="line">        PermitRootLogin yes</span><br><span class="line">    sudo service ssh restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="crontab定时任务"><a href="#crontab定时任务" class="headerlink" title="crontab定时任务"></a>crontab定时任务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">crontab -e：添加任务</span><br><span class="line">crontab -l：查看任务列表</span><br><span class="line"></span><br><span class="line">0 2 * * * /bin/bash backup.sh：每天 02:00 执行任务</span><br><span class="line">0 5,17 * * * /bin/bash /scripts/script.sh：每天 5:00和17:00执行任务</span><br><span class="line">*/60 * * * * /bin/bash /scripts/script.sh：每隔一个小时执行一次</span><br><span class="line">0 */2 * * * /bin/bash /scripts/script.sh：每隔两个小时执行一次</span><br><span class="line">0 17 * * sun /bin/bash /scripts/script.sh：每周日 17:00 执行任务</span><br></pre></td></tr></table></figure>
+
+<h2 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1.修改启动文件（ubuntu14、ubuntu16支持）</span><br><span class="line">    /etc/rc.local</span><br><span class="line">2.配置启动脚本</span><br><span class="line">    sudo vim /etc/init.d/automount</span><br><span class="line">        #!/bin/sh</span><br><span class="line"></span><br><span class="line">        ### BEGIN INIT INFO</span><br><span class="line">        # Provides:          jmm.com</span><br><span class="line">        # Required-Start:    $local_fs $remote_fs $network $syslog $named</span><br><span class="line">        # Required-Stop:     $local_fs $remote_fs $network $syslog $named</span><br><span class="line">        # Default-Start:     2 3 4 5</span><br><span class="line">        # Default-Stop:      0 1 6</span><br><span class="line">        # Short-Description: jmm service</span><br><span class="line">        # Description:       jmm service</span><br><span class="line">        ### END INIT INFO</span><br><span class="line"></span><br><span class="line">        busybox mount -t nfs -o nolock 10.169.0.203:/data/backup /data/mirror</span><br><span class="line">        exit 0</span><br><span class="line"></span><br><span class="line">    sudo chmod +x /etc/init.d/automount</span><br><span class="line">    sudo update-rc.d automount defaults 99（开启）</span><br><span class="line">    sudo update-rc.d -f automount remove（移除）</span><br></pre></td></tr></table></figure>
+
+<h2 id="service-和-systemctl"><a href="#service-和-systemctl" class="headerlink" title="service 和 systemctl"></a>service 和 systemctl</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">service命令其实是去/etc/init.d目录下，去执行相关程序</span><br><span class="line">    sudo service redis start</span><br><span class="line">    sudo /etc/init.d/redis start</span><br><span class="line">systemd作用是提高系统的启动速度，尽可能启动较少的进程，尽可能更多进程并发启动，systemd对应的进程管理命令是systemctl。</span><br><span class="line">    兼容service：</span><br><span class="line">    sudo systemctl redis start（启动服务）</span><br><span class="line">    systemctl enable redis（开机启动服务）</span><br></pre></td></tr></table></figure>
+
+<h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">iptables/firewall/ufw</span><br><span class="line">    iptables比较老默认开放就行</span><br><span class="line">    ufw是debian系列的（iptables托管给ufw）</span><br><span class="line">    firewall是redhat系列的</span><br><span class="line"></span><br><span class="line">ufw接管防火墙</span><br><span class="line">    sudo ufw enable（开启，阶段iptables，底层还是iptables）</span><br><span class="line">    sudo ufw disable（关闭）</span><br><span class="line">    sudo ufw status（查看防火墙表）</span><br><span class="line">    sudo ufw status verbose（查看策略）</span><br><span class="line">    sudo ufw status numbered（查看防火墙表 加行号，删除 sudo ufw delete 1）</span><br><span class="line"></span><br><span class="line">    sudo ufw allow 80（允许80，sudo ufw delete allow 80（删除就是在规则前加delete））</span><br><span class="line">    sudo ufw deny 80（拒绝80）</span><br><span class="line"></span><br><span class="line">    sudo ufw allow 80/tcp（允许80，tcp形式）</span><br><span class="line">    sudo ufw allow 9000:9002（允许一段端口）</span><br><span class="line">    sudo ufw allow from 192.168.29.36（允许ip）</span><br><span class="line">    sudo ufw allow from 192.168.1.0/24（允许ip段）</span><br><span class="line">    sudo ufw allow from 192.168.29.36 to any port 80（允许ip访问80）</span><br><span class="line">    sudo ufw allow from 192.168.29.36 to any port 80 proto tcp（允许ip以tcp形式访问80）</span><br><span class="line"></span><br><span class="line">iptables防火墙</span><br><span class="line">    sudo iptables --line-number -nL（查看列表）</span><br><span class="line">    sudo iptables -F（清空列表）</span><br><span class="line">    sudo iptables -D INPUT 3（删除input表第三条规则）</span><br><span class="line"></span><br><span class="line">    sudo iptables -P INPUT ACCEPT（允许input表）</span><br><span class="line">    sudo iptables -P OUTPUT ACCEPT（允许output表）</span><br><span class="line">    sudo iptables -P INPUT DROP（禁止input表）</span><br><span class="line">    sudo iptables -P OUTPUT DROP（禁止output表）</span><br><span class="line"></span><br><span class="line">    sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT（允许某个端口进）</span><br><span class="line">    sudo iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT（允许某个端口出）</span><br><span class="line">    sudo iptables -A INPUT -s 192.168.0.3 -j ACCEPT（允许某个ip进）</span><br><span class="line">    sudo iptables -A OUTPUT -s 192.168.0.3 -j ACCEPT（允许某个ip出）</span><br><span class="line">    sudo iptables -A INPUT -s 192.168.0.0/24 -j ACCEPT（允许192.168.0.1 - 192.168.0.254网段访问）</span><br><span class="line"></span><br><span class="line">    sudo iptables -A INPUT -p tcp --dport 22 -j DROP（禁止某个端口进）</span><br><span class="line">    sudo iptables -A OUTPUT -p tcp --sport 22 -j DROP（禁止某个端口出）</span><br><span class="line">    sudo iptables -A INPUT -s 192.168.0.3 -j DROP（禁止某个ip进）</span><br><span class="line">    sudo iptables -A OUTPUT -s 192.168.0.3 -j DROP（禁止某个ip出）</span><br><span class="line"></span><br><span class="line">    sudo iptables -I INPUT 1 -s 192.168.0.3 -j ACCEPT（允许某个ip进，插入）</span><br></pre></td></tr></table></figure>
+
+<h2 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">编辑文件：vim [file]</span><br><span class="line">三种模式：命令模式（esc进入）、底线命令模式（:/?进入）、编辑模式（i、a、o、r、I、A、O、R进入）、块模式（ctrl+v进入）</span><br><span class="line">命令模式（前面加数字可以达到重复的效果）</span><br><span class="line">    删除行：dd</span><br><span class="line">    复制行：yy</span><br><span class="line">    拷贝行：p</span><br><span class="line">    首行：gg</span><br><span class="line">    尾行：G</span><br><span class="line">    删除数字：x（X为向前删除）</span><br><span class="line">    撤销：u（ctrl+r反撤销）</span><br><span class="line">    重复上一次命令：.</span><br><span class="line">    显示当前文件名和位置：ctrl+g</span><br><span class="line">    合并两行：J</span><br><span class="line"></span><br><span class="line">底线命令模式</span><br><span class="line">    退出：:wq!、:q!、:x!、:qa!</span><br><span class="line">    跳转到行：:20</span><br><span class="line">    查找：/xxx （忽略大小写:\c，n下一个，N上一个）</span><br><span class="line">    反向查找：?xxx（忽略转义和大小写）</span><br><span class="line">    替换每行所有：:%s/aaa/bbb/g（替换当前行第一个：:s/aaa/bbb/，用其他分割符：%s#aaa#bbb#g）</span><br><span class="line">    列出所有匹配项：:g/aaa（忽略大小写:\c）</span><br><span class="line">    显示行号：set number（关闭行号：set nonumber，可写在~/.vimrc里面）</span><br><span class="line">    取消自动换行：set nowrap（换行：set wrap）</span><br><span class="line">    搜索关键字高亮：set incsearch（关闭高亮：set noincsearch）</span><br><span class="line">    忽略大小写：set ignorecase（关闭忽略大小写：set noignorecase）</span><br><span class="line">    取消粘贴缩进：set paste</span><br><span class="line">    取消鼠标选择：set mouse=（开启鼠标选择：set mouse=a）</span><br><span class="line"></span><br><span class="line">其他</span><br><span class="line">    vim分屏：:vs [file]（左右分屏），ctrl + w w（切换屏幕）</span><br><span class="line">    vimdiff对比文件：vimdiff file1 file2（dp：应用于另一边，do：获得另一边的修改，zo：展开）</span><br><span class="line">    meld对比文件：meld file1 file2</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置静态ip"><a href="#配置静态ip" class="headerlink" title="配置静态ip"></a>配置静态ip</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">network（ubuntu16及以下）</span><br><span class="line">    sudo vim /etc/network/interfaces</span><br><span class="line">        auto enp3s0</span><br><span class="line">        iface enp3s0 inet static</span><br><span class="line">        address 192.168.0.200</span><br><span class="line">        netmask 255.255.255.0</span><br><span class="line">        gateway 192.168.0.1</span><br><span class="line">        dns-nameserver 8.8.8.8</span><br><span class="line"></span><br><span class="line">    sudo service networking restart</span><br><span class="line"></span><br><span class="line">netplan（ubuntu18及以上）</span><br><span class="line">    sudo vim /etc/netplan/01-network-manager-all.yaml</span><br><span class="line">        network:</span><br><span class="line">          version: 2</span><br><span class="line">          renderer: NetworkManager</span><br><span class="line">          ethernets:</span><br><span class="line">             eno1: # 网卡</span><br><span class="line">               dhcp4: no # dhcp4关闭</span><br><span class="line">               addresses: [192.168.202.36/24] # ip和掩码</span><br><span class="line">               gateway4: 192.168.202.1 # 网关</span><br><span class="line">               nameservers:</span><br><span class="line">                 addresses: [8.8.8.8,114.114.114.114] #设置DNS</span><br><span class="line"></span><br><span class="line">    sudo netplan apply</span><br><span class="line"></span><br><span class="line">netplan（ubuntu20及以上）</span><br><span class="line">    sudo vim /etc/netplan/01-network-manager-all.yaml</span><br><span class="line">        network:</span><br><span class="line">          version: 2</span><br><span class="line">          renderer: NetworkManager</span><br><span class="line">          ethernets:</span><br><span class="line">             eno1:</span><br><span class="line">               dhcp4: no</span><br><span class="line">               addresses: [10.170.0.238/23]</span><br><span class="line">               routes:</span><br><span class="line">               - to: default</span><br><span class="line">                 via: 10.170.0.1</span><br><span class="line">               nameservers:</span><br><span class="line">                 addresses: [8.8.8.8,114.114.114.114] #设置DNS</span><br><span class="line"></span><br><span class="line">    sudo netplan apply</span><br></pre></td></tr></table></figure>
+
+<h2 id="dependency-problems-leaving-unconfigured问题"><a href="#dependency-problems-leaving-unconfigured问题" class="headerlink" title="dependency problems - leaving unconfigured问题"></a>dependency problems - leaving unconfigured问题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /var/lib/dpkg/info/ /var/lib/dpkg/info_old/</span><br><span class="line">sudo mkdir /var/lib/dpkg/info/</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -f install</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<h2 id="profile和bashrc"><a href="#profile和bashrc" class="headerlink" title="profile和bashrc"></a>profile和bashrc</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">profile：系统全局环境登录的一些配置</span><br><span class="line">bashrc：用户bash的一些配置</span><br><span class="line">.env：进入目录时初始化环境</span><br><span class="line">执⾏顺序为：/etc/profile -&gt; (~/.bash_profile | ~/.bash_login | ~/.profile) -&gt; ~/.bashrc -&gt; /etc/bashrc -&gt; ~/.</span><br></pre></td></tr></table></figure>
+
+<h2 id="文本处理三剑客（grep-x2F-egrep、sed、awk）"><a href="#文本处理三剑客（grep-x2F-egrep、sed、awk）" class="headerlink" title="文本处理三剑客（grep&#x2F;egrep、sed、awk）"></a>文本处理三剑客（grep&#x2F;egrep、sed、awk）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">正则支持（三剑客都是以行为单位进行处理）</span><br><span class="line">    grep：默认不支持扩展正则，加上-E支持扩展正则，如果不加上-E，使用\&#123;\&#125;要加上\进行转义。</span><br><span class="line">    egrep：支持基础和扩展正则，相当于grep -E。</span><br><span class="line">    sed：默认不支持扩展正则，机上-r选项支持扩展正则，如果不加上-r，使用\&#123;\&#125;要加上\进行转义。</span><br><span class="line">    awk：默认支持所有正则。</span><br><span class="line"></span><br><span class="line">    shell的正则分为两类：</span><br><span class="line">        基础正则表达式、扩展正则表达式 &#123;扩展的有+、？、|、（）&#125;</span><br><span class="line">    区分正则和通配符：</span><br><span class="line">        1、只要涉及grep/egrep sed awk都是正则。其他的都是统配符</span><br><span class="line">        2、涉及文件和目录名——统配符；涉及文本内容——正则</span><br><span class="line">    基础正则</span><br><span class="line">        ^ ：表示匹配字符串开头</span><br><span class="line">        . ：匹配一个字符，且该字符必须存在</span><br><span class="line">        * ：匹配前面一个字符的0个或者多个</span><br><span class="line">        .* ：可以匹配任意长度的任意内容</span><br><span class="line">        $ ：匹配字符串结尾</span><br><span class="line">        [] ：表示匹配括号里的任意一个字符</span><br><span class="line">        ^[^s] ：^在中括号中有^表示取反，非。匹配不以s开头的字符</span><br><span class="line">        \&#123;n,m\&#125; ：匹配字符n到m次，至少n次，至多m次</span><br><span class="line">        \(\) ：分组</span><br><span class="line">        \&lt;\&gt; ：单词锚定，\&lt;root\&lt;，root必须作为一行的单词出现,也可\broot\b</span><br><span class="line">    拓展正则</span><br><span class="line">        grep -E ：-E支持拓展正则，或者直接使用egrep，拓展正则支持所有的基础正则</span><br><span class="line">        ? ：最多匹配一个，可以是0个</span><br><span class="line">        + ：至少匹配一个可以是多个</span><br><span class="line">        | ：或</span><br><span class="line">        () ：分组</span><br><span class="line"></span><br><span class="line">grep使用</span><br><span class="line">    -r：目录递归</span><br><span class="line">    -n：打印行号</span><br><span class="line">    -s：不显示错误</span><br><span class="line">    -i：忽略大小写</span><br><span class="line">    -o：只打印匹配的内容</span><br><span class="line">    -v：取反，打印不匹配的行</span><br><span class="line">    -q：如果有匹配的内容则返回状态值0</span><br><span class="line">    -c：匹配的内容有多少行</span><br><span class="line">    -E：扩展正则表达式</span><br><span class="line">    -P：支持perl的正则语法</span><br><span class="line">    -A1：after打印匹配的后几行</span><br><span class="line">    -B1：before打印匹配的后几行</span><br><span class="line">    -C1：打印匹配的前后几行</span><br><span class="line"></span><br><span class="line">sed操作</span><br><span class="line">    选项</span><br><span class="line">        -i：直接修改写入到文件内容，而不是输出到终端。如果不使用-i那么只会修改内存中的内容，而不会写入到磁盘。</span><br><span class="line">        -n：输出模式，取消默认的sed软件输出，常与sed-commands的p连用</span><br><span class="line">        -e：多点操作，一条命令语句执行多个sed操作。</span><br><span class="line">        -r：使用扩展正则表达式</span><br><span class="line">    sed-commands（$表示行末）：</span><br><span class="line">        i ：insert 插入，在指定的行前添加一行或多行文本</span><br><span class="line">        a ：append 在指定行后面追加一行或者多行文本</span><br><span class="line">        s ：search 搜索字符串</span><br><span class="line">        c ：change 取代指定的行或者多行</span><br><span class="line">        d ：delete 删除指定的行或者多行</span><br><span class="line">        p ：print 打印模式空间的内容，通常p和-n选项一起使用</span><br><span class="line">        ! ：取非，对指定行以外的所有行应用命令</span><br><span class="line">    例子</span><br><span class="line">        第一行前添加：sed &quot;1 i hello world&quot; xxx.xml</span><br><span class="line">        第一行后添加：sed &quot;1 a hello world&quot; xxx.xml</span><br><span class="line">        最后一行之后添加：sed &quot;$ a hello world&quot; xxx.xml</span><br><span class="line">        删除第一行：sed &quot;1 d&quot; xxx.xml</span><br><span class="line">        删除1-最后行：sed &quot;1,$ d&quot; xxx.xml</span><br><span class="line">        取代第一行：sed &quot;1 c hello world\nname&quot; xxx.xml</span><br><span class="line">        取代1-最后行：sed &quot;1,$ c hello world\nname&quot; xxx.xml</span><br><span class="line">        打印第一行：sed -n &quot;1 p&quot; xxx.xml</span><br><span class="line">        打印1-最后行：sed -n &quot;1,$ p&quot; xxx.xml</span><br><span class="line">        打印除2-5行：sed -n &#x27;2,5! p&#x27; xxx.xml</span><br><span class="line"></span><br><span class="line">        找到某行在前添加：sed &quot;/path=\&quot;build\/make\&quot;/i hello world&quot; xxx.xml</span><br><span class="line">        找到某行在后添加：sed &quot;/path=\&quot;build\/make\&quot;/a hello world&quot; xxx.xml</span><br><span class="line">        找到某行后删除：sed &quot;/path=\&quot;build\/make\&quot;/d&quot; xxx.xml</span><br><span class="line">        找到某行后取代：sed &quot;/path=\&quot;build\/make\&quot;/c hello world&quot; xxx.xml</span><br><span class="line">        找到某行后打印：sed -n &quot;/path=\&quot;build\/make\&quot;/p&quot; xxx.xml</span><br><span class="line"></span><br><span class="line">        多点操作：sed -e &#x27;1d&#x27; -e &#x27;5,7d&#x27; xxx.xml</span><br><span class="line"></span><br><span class="line">        替换文件内容：sed &quot;s/path=\&quot;build\/make\&quot;/path=\&quot;hello world\&quot;/g&quot; xxx.xml</span><br><span class="line">        替换文件内容（基础正则，使用取反来达到懒汉模式）：sed &quot;s/path=\&quot;[^\&quot;]*\&quot;/path=\&quot;hello world\&quot;/g&quot; xxx.xml</span><br><span class="line"></span><br><span class="line">awk操作</span><br><span class="line">    $0，整条记录</span><br><span class="line">    $1、$2、$3，输出一个指定的字段</span><br><span class="line">    FS，段分隔符，默认空格</span><br><span class="line">    RS，行分隔符</span><br><span class="line">    NR，行号</span><br><span class="line">    NF，字段数量，$NF，最后一个字段</span><br><span class="line">    ~，表示正则匹配</span><br><span class="line">    //，进行内容匹配</span><br><span class="line"></span><br><span class="line">    输出所有行：awk &#x27;&#123;print $0&#125;&#x27; /etc/passwd</span><br><span class="line">    输出第二行：awk &#x27;NR==2&#123;print $0&#125;&#x27; /etc/passwd</span><br><span class="line">    输出二到五行：awk &#x27;NR&gt;=2&amp;&amp;NR&lt;=5&#123;print $0&#125;&#x27; /etc/passwd</span><br><span class="line">    输出行号：awk &#x27;&#123;print NR,$0&#125;&#x27; /etc/passwd</span><br><span class="line">    输出行号：awk &#x27;&#123;print NR&quot; &quot;$0&#125;&#x27; /etc/passwd</span><br><span class="line">    分隔符：awk -F &#x27;:&#x27; &#x27;&#123;print $1,$2,$3,$4&#125;&#x27; /etc/passwd</span><br><span class="line">    锚定查找并输出：awk &#x27;/\&lt;root\&gt;/&#123;print NR&quot;\t&quot;$0&#125;&#x27; /etc/passwd</span><br><span class="line">    正则匹配：awk &#x27;$0~/root/&#x27; /etc/passwd</span><br><span class="line">    末尾查找字串：awk -F &#x27;:&#x27; &#x27;$NF~/sbin/&#123;print $0&#125;&#x27; /etc/passwd</span><br><span class="line">    多个分隔符：awk -F &#x27;[:/]+&#x27; &#x27;&#123;print $5,$6,$7,$8&#125;&#x27; /etc/passwd</span><br><span class="line"></span><br><span class="line">    开始前输入：awk -F : &#x27;BEGIN&#123;print &quot;USERNAME&quot;&#125; &#123;print $1&#125;&#x27; /etc/passwd</span><br><span class="line">    前后输入：awk -F : &#x27;BEGIN&#123;print &quot;USERNAME&quot;&#125; &#123;print $1&#125; END&#123;print &quot;END OF FILE&quot;&#125;&#x27; /etc/passwd</span><br><span class="line">    统计次数：awk &#x27;BEGIN&#123;num=0&#125;/nologin/&#123;num++&#125;END&#123;print num&#125;&#x27; /etc/passwd</span><br><span class="line">    遍历：awk -F : &#x27;&#123;ken[$NF]++&#125;END&#123;for (i in ken) print ken[i] i&#125;&#x27; /etc/passwd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cat access.log | awk &#x27;&#123;print $1&#125;&#x27; | sort | uniq -c | sort -rn | head -3</span><br><span class="line">    awk &#x27;&#123;ken[$1]++&#125;END&#123;for (i in ken) print ken[i],i&#125;&#x27; access.log | sort -rn | head -3</span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thanks<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">攻击</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://www.mijm.site/2022/06/28/2022-6-28Linux%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2022/06/26/2022-6-26git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git merge策略解析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -218,8 +360,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
