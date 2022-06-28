@@ -6,16 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://www.mijm.site">
-  <title>Archives: 2022/6 | Mijm Blog</title>
+  <title>git merge策略解析 | Mijm Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="this is blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mijm Blog">
-<meta property="og:url" content="https://www.mijm.site/archives/2022/06/index.html">
+  <meta name="description" content="git merge策略解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git merge策略解析">
+<meta property="og:url" content="https://www.mijm.site/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="Mijm Blog">
-<meta property="og:description" content="this is blog">
+<meta property="og:description" content="git merge策略解析">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-28T14:20:18.200Z">
 <meta property="article:author" content="mijm">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="merge">
+<meta property="article:tag" content="策略">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Mijm Blog" type="application/atom+xml">
@@ -142,36 +147,97 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-git merge策略解析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2022-06-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/">git merge策略解析</a>
+    <h1 class="article-title" itemprop="name">
+      git merge策略解析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-06-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>git merge策略解析</p>
+<span id="more"></span>
+
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><code>git merge BRANCH_NAME [-s, --strategy &lt;strategy&gt;] [-X, --strategy-option &lt;option=value&gt;]</code></p>
+<h2 id="git-merge策略，参数：-s"><a href="#git-merge策略，参数：-s" class="headerlink" title="git merge策略，参数：-s"></a>git merge策略，参数：<code>-s</code></h2><ul>
+<li>resolve</li>
+<li>recursive</li>
+<li>octopus</li>
+<li>ours</li>
+<li>subtree</li>
+</ul>
+<h3 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这使用的是三路合并算法。的三路合并算法会存在发现多个共同祖先的问题。</span><br><span class="line">此策略会 “仔细地” 寻找其中一个共同祖先。</span><br><span class="line">由于不需要递归合并出虚拟节点，所以此方法合并时会比较快速，但也可能会带来更多冲突。</span><br><span class="line">不敢说带来更多冲突是好事还是坏事，因为自动合并成功并不一定意味着在代码含义上也算是正确的合并。</span><br><span class="line">所以如果自动合并总是成功但代码含义上会失败，可以考虑此合并策略，这将让更多的冲突变成手工合并而不是自动合并。</span><br></pre></td></tr></table></figure>
+
+<h3 id="recursive"><a href="#recursive" class="headerlink" title="recursive"></a>recursive</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是默认的合并策略，如果你不指定策略参数，那么将使用这个合并策略。这将直接使用递归三路合并算法进行合并。</span><br></pre></td></tr></table></figure>
+
+<h3 id="octopus"><a href="#octopus" class="headerlink" title="octopus"></a>octopus</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">此策略允许合并多个 git 提交节点（分支）。</span><br><span class="line">不过，如果会出现需要手工解决的冲突，那么此策略将不会执行。</span><br><span class="line">此策略就是用来把多个分支聚集在一起的。</span><br></pre></td></tr></table></figure>
+
+<h3 id="ours"><a href="#ours" class="headerlink" title="ours"></a>ours</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在合并的时候，无论有多少个合并分支，当前分支就直接是最终的合并结果。无论其他人有多少修改，在此次合并之后，都将不存在（当然历史里面还有）。</span><br><span class="line"></span><br><span class="line">你可能觉得这种丢失改动的合并策略没有什么用。但如果你准备重新在你的仓库中进行开发（程序员最喜欢的重构），那么当你的修改与旧分支合并时，采用此合并策略就非常有用，你新的重构代码将完全不会被旧分支的改动所影响。</span><br><span class="line"></span><br><span class="line">注意 recursive 策略中也有一个 ours 参数，与这个不同的。</span><br></pre></td></tr></table></figure>
+
+<h3 id="subtree"><a href="#subtree" class="headerlink" title="subtree"></a>subtree</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此策略使用的是修改后的递归三路合并算法。与 recursive 不同的是，此策略会将合并的两个分支的其中一个视为另一个的子树，就像 git subtree 中使用的子树一样。</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-merge策略的参数，参数：-X"><a href="#git-merge策略的参数，参数：-X" class="headerlink" title="git merge策略的参数，参数：-X"></a>git merge策略的参数，参数：<code>-X</code></h2><ul>
+<li>ours</li>
+<li>theirs</li>
+<li>ignore-space-change</li>
+<li>find-renames&#x3D;0</li>
+<li>diff-algorithm&#x3D;{patience|minimal|histogram|myers}</li>
+</ul>
+<h3 id="resolve-1"><a href="#resolve-1" class="headerlink" title="resolve"></a>resolve</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-X ours（使用我们的）</span><br><span class="line">-X theirs（使用他们的）</span><br><span class="line">-X ignore-space-change（空格改动的话就忽略）</span><br><span class="line">-X find-renames=0（值越小，使文件越相同）</span><br><span class="line">-X diff-algorithm=&#123;patience|minimal|histogram|myers&#125;（指定一个差异算法，myers是默认的，具体算法差异可通过man手册来查看）</span><br><span class="line">    此策略的名称叫 “耐心”，因为 git 将话费更多的时间来进行合并一些看起来不怎么重要的行，合并的结果也更加准确。当然，使用的算法是 recursive 即递归三路合并算法</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-merge其他参数"><a href="#git-merge其他参数" class="headerlink" title="git merge其他参数"></a>git merge其他参数</h2><p><code>git merge BRANCH_NAME</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--no-ff               强行关掉fast-forward，所以在使用这种方式后，分支合并后会生成一个新的commit（默认--ff）</span><br><span class="line">--no-edit             不进入编辑页面，直接提交</span><br><span class="line">--squash              创建一个单独的提交而不是做一次合并</span><br><span class="line">--stat                show a diffstat at the end of the merge</span><br><span class="line">--summary             (synonym to --stat)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thanks<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,19 +257,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://www.mijm.site/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/09/27/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E6%94%BB%E5%87%BB%E5%8B%92%E7%B4%A2%E6%A1%88%E4%BE%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">服务器被攻击勒索案例</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,8 +379,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
