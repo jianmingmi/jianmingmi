@@ -1,7 +1,7 @@
 ---
 title: git merge策略解析
 date: 2022-6-28
-tags: [git, 策略]
+tags: [git, merge, 策略]
 ---
 
 git merge策略解析
@@ -10,8 +10,6 @@ git merge策略解析
 
 ## 命令
 ``git merge BRANCH_NAME [-s, --strategy <strategy>] [-X, --strategy-option <option=value>]``
-
----
 
 ## git merge策略，参数：``-s``
 
@@ -61,8 +59,6 @@ git merge策略解析
 此策略使用的是修改后的递归三路合并算法。与 recursive 不同的是，此策略会将合并的两个分支的其中一个视为另一个的子树，就像 git subtree 中使用的子树一样。
 ```
 
----
-
 ## git merge策略的参数，参数：``-X``
 
 - ours
@@ -80,4 +76,16 @@ git merge策略解析
 -X find-renames=0（值越小，使文件越相同）
 -X diff-algorithm={patience|minimal|histogram|myers}（指定一个差异算法，myers是默认的，具体算法差异可通过man手册来查看）
     此策略的名称叫 “耐心”，因为 git 将话费更多的时间来进行合并一些看起来不怎么重要的行，合并的结果也更加准确。当然，使用的算法是 recursive 即递归三路合并算法
+```
+
+## git merge其他参数
+
+``git merge BRANCH_NAME``
+
+```
+--no-ff               强行关掉fast-forward，所以在使用这种方式后，分支合并后会生成一个新的commit（默认--ff）
+--no-edit             不进入编辑页面，直接提交
+--squash              创建一个单独的提交而不是做一次合并
+--stat                show a diffstat at the end of the merge
+--summary             (synonym to --stat)
 ```
