@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://www.mijm.site">
-  <title>git merge策略解析 | Mijm Blog</title>
+  <title>常见环境问题及解决方案 | Mijm Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="git merge策略解析">
+  <meta name="description" content="常见环境问题及解决方案">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git merge策略解析">
-<meta property="og:url" content="https://www.mijm.site/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="常见环境问题及解决方案">
+<meta property="og:url" content="https://www.mijm.site/2015/10/23/2015-10-23%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="Mijm Blog">
-<meta property="og:description" content="git merge策略解析">
+<meta property="og:description" content="常见环境问题及解决方案">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-28T14:55:31.475Z">
+<meta property="article:published_time" content="2015-10-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-28T15:06:58.459Z">
 <meta property="article:author" content="mijm">
-<meta property="article:tag" content="git">
-<meta property="article:tag" content="merge">
-<meta property="article:tag" content="策略">
+<meta property="article:tag" content="环境">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Mijm Blog" type="application/atom+xml">
@@ -147,71 +145,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-git merge策略解析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2015-10-23常见环境问题及解决方案" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      git merge策略解析
+      常见环境问题及解决方案
     </h1>
   
 
         
-        <a href="/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2022-06-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-26</time>
+        <a href="/2015/10/23/2015-10-23%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="archive-article-date">
+  	<time datetime="2015-10-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>git merge策略解析</p>
+        <p>常见环境问题及解决方案</p>
 <span id="more"></span>
 
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p><code>git merge BRANCH_NAME [-s, --strategy &lt;strategy&gt;] [-X, --strategy-option &lt;option=value&gt;]</code></p>
-<h2 id="git-merge策略，参数：-s"><a href="#git-merge策略，参数：-s" class="headerlink" title="git merge策略，参数：-s"></a>git merge策略，参数：<code>-s</code></h2><ul>
-<li>resolve</li>
-<li>recursive</li>
-<li>octopus</li>
-<li>ours</li>
-<li>subtree</li>
-</ul>
-<h3 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这使用的是三路合并算法。的三路合并算法会存在发现多个共同祖先的问题。</span><br><span class="line">此策略会 “仔细地” 寻找其中一个共同祖先。</span><br><span class="line">由于不需要递归合并出虚拟节点，所以此方法合并时会比较快速，但也可能会带来更多冲突。</span><br><span class="line">不敢说带来更多冲突是好事还是坏事，因为自动合并成功并不一定意味着在代码含义上也算是正确的合并。</span><br><span class="line">所以如果自动合并总是成功但代码含义上会失败，可以考虑此合并策略，这将让更多的冲突变成手工合并而不是自动合并。</span><br></pre></td></tr></table></figure>
+<h2 id="二级路由器设置"><a href="#二级路由器设置" class="headerlink" title="二级路由器设置"></a>二级路由器设置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.动态获取</span><br><span class="line">    一级lan连二级wan</span><br><span class="line">    二级wan改为动态获取</span><br><span class="line">    二级lan改为192.168.2.1</span><br><span class="line">2.做交换机</span><br><span class="line">    一级lan连二级lan</span><br><span class="line">    二级lan改为192.168.1.2</span><br><span class="line">    二级关闭dhcp服务</span><br><span class="line">3.设置WDS无线桥接</span><br><span class="line">    二级路由器设置WDS无线桥接</span><br><span class="line">    连接一级路由器无线网络</span><br></pre></td></tr></table></figure>
 
-<h3 id="recursive"><a href="#recursive" class="headerlink" title="recursive"></a>recursive</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是默认的合并策略，如果你不指定策略参数，那么将使用这个合并策略。这将直接使用递归三路合并算法进行合并。</span><br></pre></td></tr></table></figure>
+<h2 id="Wifi信道"><a href="#Wifi信道" class="headerlink" title="Wifi信道"></a>Wifi信道</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">802.11 （1997年发布）</span><br><span class="line">802.11b （1999年发布）</span><br><span class="line">802.11b （1999年发布）</span><br><span class="line">802.11g （2003年发布） ，又叫 Wi-Fi 3，理论最大传输速率达54Mbps</span><br><span class="line">802.11n （2009年发布） ，又叫 Wi-Fi 4，理论最大传输速率为600 Mbps</span><br><span class="line">802.11ac （2014年发布），又叫 Wi-Fi 5，理论最大传输速率为6.9G bps</span><br><span class="line">802.11ax （2019年发布），又叫 Wi-Fi 6，理论最大传输速率为9.6G bps</span><br></pre></td></tr></table></figure>
 
-<h3 id="octopus"><a href="#octopus" class="headerlink" title="octopus"></a>octopus</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">此策略允许合并多个 git 提交节点（分支）。</span><br><span class="line">不过，如果会出现需要手工解决的冲突，那么此策略将不会执行。</span><br><span class="line">此策略就是用来把多个分支聚集在一起的。</span><br></pre></td></tr></table></figure>
+<h2 id="Raid"><a href="#Raid" class="headerlink" title="Raid"></a>Raid</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">raid 0：错开存储，容量不变，速度*2</span><br><span class="line">raid 1：备份存储，容量/2，速度不变</span><br><span class="line">raid 5：相互校验存储，容量n-1，速度*(n-1)</span><br></pre></td></tr></table></figure>
 
-<h3 id="ours"><a href="#ours" class="headerlink" title="ours"></a>ours</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在合并的时候，无论有多少个合并分支，当前分支就直接是最终的合并结果。无论其他人有多少修改，在此次合并之后，都将不存在（当然历史里面还有）。</span><br><span class="line"></span><br><span class="line">你可能觉得这种丢失改动的合并策略没有什么用。但如果你准备重新在你的仓库中进行开发（程序员最喜欢的重构），那么当你的修改与旧分支合并时，采用此合并策略就非常有用，你新的重构代码将完全不会被旧分支的改动所影响。</span><br><span class="line"></span><br><span class="line">注意 recursive 策略中也有一个 ours 参数，与这个不同的。</span><br></pre></td></tr></table></figure>
+<h2 id="row和raw"><a href="#row和raw" class="headerlink" title="row和raw"></a>row和raw</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">row指的是硬盘</span><br><span class="line">raw指的是内存</span><br></pre></td></tr></table></figure>
 
-<h3 id="subtree"><a href="#subtree" class="headerlink" title="subtree"></a>subtree</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此策略使用的是修改后的递归三路合并算法。与 recursive 不同的是，此策略会将合并的两个分支的其中一个视为另一个的子树，就像 git subtree 中使用的子树一样。</span><br></pre></td></tr></table></figure>
+<h2 id="计算机网络接口初始化"><a href="#计算机网络接口初始化" class="headerlink" title="计算机网络接口初始化"></a>计算机网络接口初始化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipconfig/registerdns</span><br><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure>
 
-<h2 id="git-merge策略的参数，参数：-X"><a href="#git-merge策略的参数，参数：-X" class="headerlink" title="git merge策略的参数，参数：-X"></a>git merge策略的参数，参数：<code>-X</code></h2><ul>
-<li>ours</li>
-<li>theirs</li>
-<li>ignore-space-change</li>
-<li>find-renames&#x3D;0</li>
-<li>diff-algorithm&#x3D;{patience|minimal|histogram|myers}</li>
-</ul>
-<h3 id="resolve-1"><a href="#resolve-1" class="headerlink" title="resolve"></a>resolve</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-X ours（使用我们的）</span><br><span class="line">-X theirs（使用他们的）</span><br><span class="line">-X ignore-space-change（空格改动的话就忽略）</span><br><span class="line">-X find-renames=0（值越小，使文件越相同）</span><br><span class="line">-X diff-algorithm=&#123;patience|minimal|histogram|myers&#125;（指定一个差异算法，myers是默认的，具体算法差异可通过man手册来查看）</span><br><span class="line">    此策略的名称叫 “耐心”，因为 git 将话费更多的时间来进行合并一些看起来不怎么重要的行，合并的结果也更加准确。当然，使用的算法是 recursive 即递归三路合并算法</span><br></pre></td></tr></table></figure>
-
-<h2 id="git-merge其他参数"><a href="#git-merge其他参数" class="headerlink" title="git merge其他参数"></a>git merge其他参数</h2><p><code>git merge BRANCH_NAME</code></p>
-<ul>
-<li>no-ff               强行关掉fast-forward，所以在使用这种方式后，分支合并后会生成一个新的commit（默认–ff）</li>
-<li>no-edit             不进入编辑页面，直接提交</li>
-<li>squash              创建一个单独的提交而不是做一次合并</li>
-<li>stat                show a diffstat at the end of the merge</li>
-<li>summary             (synonym to –stat)</li>
-</ul>
-<h2 id="git-merge方案"><a href="#git-merge方案" class="headerlink" title="git merge方案"></a>git merge方案</h2><ul>
-<li>可使用<code>git merge-base -a [branch1] [branch2]</code>查看两个分支或节点共同祖先，可提炼出需要合入的修改有哪些</li>
-<li>使用<code>git merge --no-ff -s recursive -X ignore-space-change  -m &quot;Upgrade from xxx&quot; --no-edit -q [BRANCH_NAME]</code>合入代码</li>
-<li>使用<code>git ls-files -u</code>查看未合并的文件</li>
-<li>提交到审查系统修改后统一合入</li>
-</ul>
-
+<h2 id="github网络过慢问题"><a href="#github网络过慢问题" class="headerlink" title="github网络过慢问题"></a>github网络过慢问题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">查询dns</span><br><span class="line">    https://tool.chinaz.com/dns</span><br><span class="line">修改hosts文件地址</span><br><span class="line">    C:\Windows\System32\drivers\etc\hosts</span><br><span class="line">    20.205.243.166 github.com</span><br><span class="line">重启dns</span><br><span class="line">    ipconfig/flushdns</span><br></pre></td></tr></table></figure>
       
 
       
@@ -255,15 +222,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">merge</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">策略</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">环境</a>
         		</li>
       		
 		</ul>
@@ -319,7 +278,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://www.mijm.site/2022/06/26/git%20merge%E7%AD%96%E7%95%A5%E8%A7%A3%E6%9E%90/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://www.mijm.site/2015/10/23/2015-10-23%E5%B8%B8%E8%A7%81%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -333,11 +292,15 @@
   
 <nav id="article-nav">
   
-  
-    <a href="/2017/09/27/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E6%94%BB%E5%87%BB%E5%8B%92%E7%B4%A2%E6%A1%88%E4%BE%8B/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">服务器被攻击勒索案例</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2017/09/27/2017-9-27%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E6%94%BB%E5%87%BB%E5%8B%92%E7%B4%A2%E6%A1%88%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          服务器被攻击勒索案例
+        
+      </div>
     </a>
+  
   
 </nav>
 
@@ -461,6 +424,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">攻击</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
@@ -470,10 +441,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">策略</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">攻击</a>
               </li>
             
             <div class="clearfix"></div>
