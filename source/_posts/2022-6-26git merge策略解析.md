@@ -1,6 +1,6 @@
 ---
 title: git merge策略解析
-date: 2022-6-28
+date: 2022-6-26
 tags: [git, merge, 策略]
 ---
 
@@ -82,10 +82,16 @@ git merge策略解析
 
 ``git merge BRANCH_NAME``
 
-```
---no-ff               强行关掉fast-forward，所以在使用这种方式后，分支合并后会生成一个新的commit（默认--ff）
---no-edit             不进入编辑页面，直接提交
---squash              创建一个单独的提交而不是做一次合并
---stat                show a diffstat at the end of the merge
---summary             (synonym to --stat)
-```
+- no-ff               强行关掉fast-forward，所以在使用这种方式后，分支合并后会生成一个新的commit（默认--ff）
+- no-edit             不进入编辑页面，直接提交
+- squash              创建一个单独的提交而不是做一次合并
+- stat                show a diffstat at the end of the merge
+- summary             (synonym to --stat)
+
+
+## git merge方案
+
+- 可使用``git merge-base -a [branch1] [branch2]``查看两个分支或节点共同祖先，可提炼出需要合入的修改有哪些
+- 使用``git merge --no-ff -s recursive -X ignore-space-change  -m "Upgrade from xxx" --no-edit -q [BRANCH_NAME]``合入代码
+- 使用``git ls-files -u``查看未合并的文件
+- 提交到审查系统修改后统一合入
