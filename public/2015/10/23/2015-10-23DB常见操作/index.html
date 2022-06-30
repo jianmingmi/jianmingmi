@@ -16,7 +16,7 @@
 <meta property="og:description" content="DB常见操作">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-10-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-28T15:18:09.523Z">
+<meta property="article:modified_time" content="2022-06-30T16:27:44.046Z">
 <meta property="article:author" content="mijm">
 <meta property="article:tag" content="DB">
 <meta name="twitter:card" content="summary">
@@ -181,6 +181,7 @@
 
 <h2 id="sqlite常用操作"><a href="#sqlite常用操作" class="headerlink" title="sqlite常用操作"></a>sqlite常用操作</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">创建表</span><br><span class="line">    drop table if exists `user`;</span><br><span class="line">    create table if no exists `user` (</span><br><span class="line">     id integer primary key,    -- integer primary key即为自增</span><br><span class="line">     name varchar(32),</span><br><span class="line">     age integer</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">查表信息</span><br><span class="line">    select name from sqlite_master;</span><br><span class="line"></span><br><span class="line">查询出某个表的所有字段信息</span><br><span class="line">    PRAGMA table_info([tablename]);</span><br></pre></td></tr></table></figure>
 
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">sql  操作</span><br><span class="line"></span><br><span class="line">一.sql语句</span><br><span class="line">  </span><br><span class="line">	增	insert into user (id,name,sex) values (1,&#x27;王明&#x27;,1)</span><br><span class="line">	删	delete from user where id = 1</span><br><span class="line">	改	update user set name=&#x27;张&#x27;,sex=1 where id = 1</span><br><span class="line">	查	select * from user where name like %&#x27;张&#x27;% limit 0,10</span><br><span class="line"></span><br><span class="line">二.JDBC操作</span><br><span class="line">      </span><br><span class="line">	================================数据库操作，五步==========================</span><br><span class="line">	</span><br><span class="line">	//1.加载驱动</span><br><span class="line">	Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line"></span><br><span class="line">	//2.连接数据库</span><br><span class="line">	Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/数据库名?useUnicode=true&amp;characterEncoding=utf-8&quot;,&quot;用户&quot;,&quot;密码&quot;);</span><br><span class="line"></span><br><span class="line">	//3.使用Connection创建语句</span><br><span class="line">	String sql = &quot;select * from user&quot;;</span><br><span class="line">	PreparedStatement pst = connection.prepareStatement(sql);</span><br><span class="line">	</span><br><span class="line">	//4.执行</span><br><span class="line">	ResultSet rs = pst.executeQuery();//查询</span><br><span class="line">	ResultSet rs = pst.executeUpdate();//增删改</span><br><span class="line"></span><br><span class="line">	/*</span><br><span class="line">	while(rs.next())&#123;</span><br><span class="line">		int id = rs.getInt(&quot;id&quot;);</span><br><span class="line">		String name = rs.getString(&quot;name&quot;);</span><br><span class="line">		String pwd = rs.getString(&quot;pwd&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	*/</span><br><span class="line">	</span><br><span class="line">	//5.关闭数据，从下到上</span><br><span class="line">	rs.close();</span><br><span class="line">	pst.close();</span><br><span class="line">	connection.close();</span><br><span class="line"></span><br><span class="line">	======================================结束=======================================</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">三.读取配置文件信息（database.properties）（单例模式）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//读取配置文件的工具类-单例模式</span><br><span class="line"></span><br><span class="line">public class ConfigManager &#123;</span><br><span class="line">	private static ConfigManager configManager;</span><br><span class="line">	private static Properties properties;</span><br><span class="line">	</span><br><span class="line">	//私有构造器</span><br><span class="line">	private ConfigManager()&#123;</span><br><span class="line">		String configFile = &quot;database.properties&quot;;</span><br><span class="line">		properties = new Properties();</span><br><span class="line">		//通过classpath找资源</span><br><span class="line">		InputStream is = ConfigManager.class.getClassLoader().getResourceAsStream(configFile);</span><br><span class="line">		try &#123;</span><br><span class="line">			properties.load(is);</span><br><span class="line">			is.close();</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			// TODO Auto-generated catch block</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	/*</span><br><span class="line">	 * </span><br><span class="line">	 * 线程不安全，在并发的情况下，很有可能会出现多个ConfigManager实例</span><br><span class="line">	 * 考虑同步,可以采用synchronized</span><br><span class="line">	 * </span><br><span class="line">	 * */</span><br><span class="line">	//全局访问点</span><br><span class="line">	public static synchronized ConfigManager getInstance()&#123;</span><br><span class="line">		if(configManager == null)&#123;</span><br><span class="line">			configManager = new ConfigManager();</span><br><span class="line">		&#125;</span><br><span class="line">		return configManager;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getValue(String key)&#123;</span><br><span class="line">		 return properties.getProperty(key);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	//用key取出properties里面的value</span><br><span class="line">	String driver = ConfigManager.getInstance().getString(&quot;driver&quot;);</span><br><span class="line">	String url = ConfigManager.getInstance().getString(&quot;url&quot;);</span><br><span class="line">	String user = ConfigManager.getInstance().getString(&quot;user&quot;);</span><br><span class="line">	String pwd = ConfigManager.getInstance().getString(&quot;pwd&quot;);</span><br></pre></td></tr></table></figure>
       
 
       
@@ -294,11 +295,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/27/2017-9-27%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E6%94%BB%E5%87%BB%E5%8B%92%E7%B4%A2%E6%A1%88%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/06/05/2016-6-5Android%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          服务器被攻击勒索案例
+          Android基础
         
       </div>
     </a>
@@ -439,11 +440,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">攻击</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -459,11 +472,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">flask</a>
+                <a href="javascript:void(0)" class="js-tag color3">食物</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">flask</a>
               </li>
              
               <li class="article-tag-list-item">
