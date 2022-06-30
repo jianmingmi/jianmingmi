@@ -16,9 +16,10 @@
 <meta property="og:description" content="git-lfs">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-30T08:09:22.649Z">
+<meta property="article:modified_time" content="2022-06-30T09:32:02.557Z">
 <meta property="article:author" content="mijm">
-<meta property="article:tag" content="git lfs">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="lfs">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Mijm Blog" type="application/atom+xml">
@@ -185,7 +186,7 @@
 <h3 id="Case-1-从-0-开始配置使用-git-lfs"><a href="#Case-1-从-0-开始配置使用-git-lfs" class="headerlink" title="Case 1. 从 0 开始配置使用 git-lfs"></a>Case 1. 从 0 开始配置使用 git-lfs</h3><p>我们要指定 <code>git-lfs</code> 会把哪些文件当作大文件，指定方式比如有：</p>
 <p>指定文件后缀名——<code>git lfs track &quot;*.filetype&quot;</code></p>
 <p>指定某个目录下的所有文件——<code>git lfs track &quot;directory/*&quot;</code></p>
-<p>具体指定某个文件——git <code>lfs track &quot;path/to/file&quot;</code></p>
+<p>具体指定某个文件——<code>git lfs track &quot;path/to/file&quot;</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt; mkdir &lt;repo&gt;</span><br><span class="line">&gt; cd &lt;repo&gt;</span><br><span class="line">&gt; git init</span><br><span class="line">&gt; git lfs track &quot;*.filetype&quot;         # 比如 *.zip</span><br><span class="line"> </span><br><span class="line"># 其实 git lfs track 会修改 .gitattributes 文件的内容，可以做一个快速的验证</span><br><span class="line"># &gt; cat .gitattributes</span><br><span class="line"># *.zip filter=lfs diff=lfs merge=lfs -text</span><br><span class="line"> </span><br><span class="line"># 下面假定在 Github 有一个远程仓库供我们使用</span><br><span class="line"># 往仓库里加你先前指定的文件类型的大文件</span><br><span class="line">&gt; git add .                                         </span><br><span class="line">&gt; git commit -m &quot;&quot;</span><br><span class="line">&gt; git branch -M main</span><br><span class="line">&gt; git remote add origin git@github.com:&lt;username&gt;/&lt;remote_repo_name&gt;.git     # 这里替换为自己的用户名和远程仓库名</span><br><span class="line">&gt; git push -u origin main</span><br><span class="line"># 此时命令行会显示</span><br><span class="line"># &gt; uploading LFS objects</span><br><span class="line"># 如果没有采用 git-lfs，则显示如下内容</span><br><span class="line"># &gt; Enumerating objects: 3, done.</span><br><span class="line">#   Counting objects: 100% (3/3), done.</span><br><span class="line">#   Delta compression using up to 8 threads</span><br><span class="line">#   Compressing objects: 100% (2/2), done.</span><br></pre></td></tr></table></figure>
 
 <h3 id="Case-2-要在已有的仓库上用-git-lfs-追踪某些文件"><a href="#Case-2-要在已有的仓库上用-git-lfs-追踪某些文件" class="headerlink" title="Case 2. 要在已有的仓库上用 git-lfs 追踪某些文件"></a>Case 2. 要在已有的仓库上用 git-lfs 追踪某些文件</h3><p>此时只是简单的使用 <code>git lfs track &quot;&quot;</code> 是没用的，因为你之前的 commit 已经生成了快照，你无法追踪历史中的这些大文件。</p>
@@ -245,7 +246,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">git lfs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">lfs</a>
         		</li>
       		
 		</ul>
@@ -316,8 +321,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2022/06/29/2022-6-29Python%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Python常见问题</div>
+    <a href="/2022/06/30/2022-6-30git%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git底层原理</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -443,11 +448,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DB</a>
+                <a href="javascript:void(0)" class="js-tag color3">环境</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">环境</a>
+                <a href="javascript:void(0)" class="js-tag color3">DB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,7 +460,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -471,11 +476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">git lfs</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">lfs</a>
               </li>
             
             <div class="clearfix"></div>
