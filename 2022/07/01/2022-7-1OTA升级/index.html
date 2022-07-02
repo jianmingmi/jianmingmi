@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://www.mijm.site">
-  <title>Android APK签名 | Mijm Blog</title>
+  <title>OTA升级 | Mijm Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Android APK签名">
+  <meta name="description" content="OTA升级">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android APK签名">
-<meta property="og:url" content="https://www.mijm.site/2022/07/01/2022-7-1Android%20APK%E7%AD%BE%E5%90%8D/index.html">
+<meta property="og:title" content="OTA升级">
+<meta property="og:url" content="https://www.mijm.site/2022/07/01/2022-7-1OTA%E5%8D%87%E7%BA%A7/index.html">
 <meta property="og:site_name" content="Mijm Blog">
-<meta property="og:description" content="Android APK签名">
+<meta property="og:description" content="OTA升级">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-07-02T03:26:10.333Z">
+<meta property="article:modified_time" content="2022-07-02T13:52:19.469Z">
 <meta property="article:author" content="mijm">
-<meta property="article:tag" content="android">
-<meta property="article:tag" content="apk">
-<meta property="article:tag" content="签名">
+<meta property="article:tag" content="ota">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Mijm Blog" type="application/atom+xml">
@@ -147,19 +145,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2022-7-1Android APK签名" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2022-7-1OTA升级" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Android APK签名
+      OTA升级
     </h1>
   
 
         
-        <a href="/2022/07/01/2022-7-1Android%20APK%E7%AD%BE%E5%90%8D/" class="archive-article-date">
+        <a href="/2022/07/01/2022-7-1OTA%E5%8D%87%E7%BA%A7/" class="archive-article-date">
   	<time datetime="2022-06-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-01</time>
 </a>
         
@@ -167,49 +165,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Android APK签名</p>
+        <p>OTA升级</p>
 <span id="more"></span>
 
-<h2 id="平台签名"><a href="#平台签名" class="headerlink" title="平台签名"></a>平台签名</h2><h3 id="apk的签名"><a href="#apk的签名" class="headerlink" title="apk的签名"></a>apk的签名</h3><p>简单说开发者可以通过签名 对应用进行标识和更新。包名在一个设备上是唯一的，这样可以<strong>避免被相同包名应用随意覆盖安装</strong>。这是一个非常重要的安全功能。系统中的签名文件，也是对系统中应用进行签名，编译应用是可以指定签名类型。</p>
-<h3 id="Android系统中的主要签名文件"><a href="#Android系统中的主要签名文件" class="headerlink" title="Android系统中的主要签名文件"></a>Android系统中的主要签名文件</h3><p><code>media.pk8，media.x509.pem；platform.pk8，platform.x509.pem；releasekey.pk8，releasekey.x509.pem；shared.pk8，shared.x509.pem；testkey.pk8，testkey.x509.pem</code></p>
-<h3 id="Android系统中的签名文件的路径"><a href="#Android系统中的签名文件的路径" class="headerlink" title="Android系统中的签名文件的路径"></a>Android系统中的签名文件的路径</h3><p>默认在<code>build/target/product/security</code>目录下。</p>
-<h3 id="编译时签名文件的配置"><a href="#编译时签名文件的配置" class="headerlink" title="编译时签名文件的配置"></a>编译时签名文件的配置</h3><p>在<code>Android.mk</code>通过设置<code>LOCAL_CERTIFICATE</code>实现。如：<code>LOCAL_CERTIFICATE := platform</code>即选择<code>platform</code>来签名。</p>
-<blockquote>
-<p>注：预置无源码的<code>apk</code>应用时，很多时候仍然使用原本第三方签名，<code>LOCAL_CERTIFICATE := PRESIGNED</code>。</p>
-</blockquote>
-<h3 id="pk8和-x509-pem的区别"><a href="#pk8和-x509-pem的区别" class="headerlink" title=".pk8和.x509.pem的区别"></a><code>.pk8</code>和<code>.x509.pem</code>的区别</h3><p><code>.pk8</code>就是私钥文件，用于对<code>apk</code>进行签名。这个私钥需要保密保存，不能公开。<br><code>.x509.pem</code>是证书文件，相当于公钥。这个可以公开，主要用于验证某个<code>apk</code>是否由相应的私钥签名。</p>
-<h3 id="系统不同签名文件的区别"><a href="#系统不同签名文件的区别" class="headerlink" title="系统不同签名文件的区别"></a>系统不同签名文件的区别</h3><ul>
-<li><p>sharedUserId</p>
-<ul>
-<li>每个apk或文件，系统都会分配属于自己的统一的用户ID（UID），创建沙箱保证其他应用的影响或影响其他应用。如：一般应用只能访问自己包名下的文件（&#x2F;data&#x2F;data&#x2F;pkgname），不能反问其他包名下的，其他应用也访问不了自己包名下的文件。</li>
-<li>sharedUserId,拥有同一user id的应用 之间就可以共享数据库和文件，相互访问。这些应用可以运行在同一进程，也可以运行不同进程。</li>
-</ul>
-</li>
-<li><p>sharedUserId与签名文件</p>
-<ul>
-<li>只有拥有相同sharedUserId标签的，且拥有相同签名的 应用才能分配相同的用户ID，实现数据共享。如果仅仅拥有相同sharedUserId标签，是无法确保安全的，也很容易被非法利用。</li>
-</ul>
-</li>
-<li><p>系统中5类签名文件说明</p>
-<ul>
-<li>platform:平台的核心应用签名，签名的apk是完成系统的核心功能。这些apk所在的进程UID是system。manifest节点中有添加android:sharedUserId&#x3D;”android.uid.system”。</li>
-<li>media: 这个签名的apk是media&#x2F;download的一部分。manifest节点中有添加android:sharedUserId&#x3D;”android.media”。</li>
-<li>shared:这个签名的apk可以和home&#x2F;contacts进程共享数据。manifest节点中有添加android:sharedUserId&#x3D;”android.uid.shared”。</li>
-<li>testkey&#x2F;releasekey:平台默认key。在编译中未指定LOCAL_CERTIFICATE的，默认是用testkey。因为testkey是公开的，任何人都可以获取，不安全，所以一般使用 自己创建releasekey作为默认key。</li>
-</ul>
-</li>
-</ul>
-<h3 id="修改平台默认签名"><a href="#修改平台默认签名" class="headerlink" title="修改平台默认签名"></a>修改平台默认签名</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">build/core/config.mk路径下，修改下面变量为：</span><br><span class="line">    DEFAULT_SYSTEM_DEV_CERTIFICATE := build/target/product/security/releasekey</span><br><span class="line">    或者使用宏控选择。</span><br><span class="line">system/sepolicy/private/keys.conf 和 system/sepolicy/prebuilts/api/&#123;apilevel&#125;/private/keys.conf下，修改：</span><br><span class="line">    -ENG : $DEFAULT_SYSTEM_DEV_CERTIFICATE/testkey.x509.pem</span><br><span class="line">    -USER : $DEFAULT_SYSTEM_DEV_CERTIFICATE/testkey.x509.pem</span><br><span class="line">    -USERDEBUG : $DEFAULT_SYSTEM_DEV_CERTIFICATE/testkey.x509.pem</span><br><span class="line">    +ENG : $DEFAULT_SYSTEM_DEV_CERTIFICATE/releasekey.x509.pem</span><br><span class="line">    +USER : $DEFAULT_SYSTEM_DEV_CERTIFICATE/releasekey.x509.pem</span><br><span class="line">    +USERDEBUG : $DEFAULT_SYSTEM_DEV_CERTIFICATE/releasekey.x509.pem</span><br><span class="line">build/core/core/Makefile下修改变量为：</span><br><span class="line">    BUILD_VERSION_TAGS = release-keys</span><br><span class="line">    或者使用宏控选择。</span><br></pre></td></tr></table></figure>
+<h2 id="otapackage（会生成target包和ota完整包）"><a href="#otapackage（会生成target包和ota完整包）" class="headerlink" title="otapackage（会生成target包和ota完整包）"></a>otapackage（<strong>会生成target包和ota完整包</strong>）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">name := $(TARGET_PRODUCT)</span><br><span class="line">ifeq ($(TARGET_BUILD_TYPE),debug)</span><br><span class="line">  name := $(name)_debug</span><br><span class="line">endif</span><br><span class="line">name := $(name)-ota-$(FILE_NAME_TAG)</span><br><span class="line"></span><br><span class="line">INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip</span><br><span class="line">INTERNAL_OTA_METADATA := $(PRODUCT_OUT)/ota_metadata</span><br><span class="line"></span><br><span class="line">$(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)</span><br><span class="line">$(INTERNAL_OTA_PACKAGE_TARGET): .KATI_IMPLICIT_OUTPUTS := $(INTERNAL_OTA_METADATA)</span><br><span class="line">$(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTA_FROM_TARGET_FILES)</span><br><span class="line">  @<span class="built_in">echo</span> <span class="string">&quot;Package OTA: <span class="variable">$@</span>&quot;</span></span><br><span class="line">  $(call build-ota-package-target,<span class="variable">$@</span>,-k $(KEY_CERT_PAIR) --output_metadata_path $(INTERNAL_OTA_METADATA))</span><br><span class="line"></span><br><span class="line">.PHONY: otapackage</span><br><span class="line">otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)</span><br></pre></td></tr></table></figure>
 
+<h2 id="target-files-package（会生成target）"><a href="#target-files-package（会生成target）" class="headerlink" title="target-files-package（会生成target）"></a>target-files-package（<strong>会生成target</strong>）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">name := $(TARGET_PRODUCT)</span><br><span class="line">ifeq ($(TARGET_BUILD_TYPE),debug)</span><br><span class="line">  name := $(name)_debug</span><br><span class="line">endif</span><br><span class="line">name := $(name)-target_files-$(FILE_NAME_TAG)</span><br><span class="line"></span><br><span class="line">intermediates := $(call intermediates-dir-for,PACKAGING,target_files)</span><br><span class="line">BUILT_TARGET_FILES_PACKAGE := $(intermediates)/$(name).zip</span><br><span class="line">$(BUILT_TARGET_FILES_PACKAGE): intermediates := $(intermediates)</span><br><span class="line">$(BUILT_TARGET_FILES_PACKAGE): \</span><br><span class="line">      zip_root := $(intermediates)/$(name)</span><br><span class="line"></span><br><span class="line">.PHONY: target-files-package</span><br><span class="line">target-files-package: $(BUILT_TARGET_FILES_PACKAGE)</span><br></pre></td></tr></table></figure>
 
-<h2 id="pk8和x509-pem生成和签名"><a href="#pk8和x509-pem生成和签名" class="headerlink" title="pk8和x509.pem生成和签名"></a>pk8和x509.pem生成和签名</h2><h3 id="Android生成"><a href="#Android生成" class="headerlink" title="Android生成"></a>Android生成</h3><p><code>./development/tools/make_key releasekey &#39;/C=CN/CT=Beijing/L=Beijing View/O=Android/CN=Android/emailAddress=jmm@org.com&#39;</code></p>
-<h3 id="Apk生成"><a href="#Apk生成" class="headerlink" title="Apk生成"></a>Apk生成</h3><p><code>keytool -genkey -v -keystore app.keystore -alias gundam_wing -keyalg RSA -validity 20000</code></p>
-<p>后续步骤如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">口令</span><br><span class="line">口令</span><br><span class="line">TechStone</span><br><span class="line">Gundam</span><br><span class="line">Gundam</span><br><span class="line">Shanghai</span><br><span class="line">Shanghai</span><br><span class="line">zh</span><br><span class="line">Y</span><br><span class="line">回车</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">keytool -importkeystore -srckeystore app.keystore -destkeystore tmp.p12 -srcstoretype JKS -deststoretype PKCS12</span><br><span class="line">openssl pkcs12 -in tmp.p12 -nodes -out tmp.rsa.pem</span><br><span class="line">将 -----BEGIN PRIVATE KEY----- 到 -----END PRIVATE KEY----- 这一段（包含这两个tag）的文本复制出来，新建为文件my_private.rsa.pem</span><br><span class="line">将 -----BEGIN CERTIFICATE----- 到 -----END CERTIFICATE----- 这一段（包含这两个tag）的文本复制出来，新建为文件my.x509.pem（签名时用到的公钥）</span><br><span class="line">openssl pkcs8 -topk8 -outform DER -in my_private.rsa.pem -inform PEM -out my_private.pk8 -nocrypt</span><br></pre></td></tr></table></figure>
+<h2 id="做差分包所需文件（系统）"><a href="#做差分包所需文件（系统）" class="headerlink" title="做差分包所需文件（系统）"></a>做差分包所需文件（<strong>系统</strong>）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">├── bin</span><br><span class="line">├── build</span><br><span class="line">│     └── make</span><br><span class="line">│         └── target</span><br><span class="line">│             └── product</span><br><span class="line">│                 └── security</span><br><span class="line">├── device</span><br><span class="line">│     ├── google</span><br><span class="line">│     │     ├── cuttlefish</span><br><span class="line">│     │     │     └── host</span><br><span class="line">│     │     │         └── frontend</span><br><span class="line">│     │     └── vrservices</span><br><span class="line">│     │         └── vrcore</span><br><span class="line">│     │             └── sepolicy</span><br><span class="line">│     └── qcom</span><br><span class="line">│         └── sepolicy_vndr</span><br><span class="line">│             ├── legacy</span><br><span class="line">│             │     └── vendor</span><br><span class="line">│             └── qva</span><br><span class="line">│                 └── vendor</span><br><span class="line">├── external</span><br><span class="line">│     └── avb</span><br><span class="line">│         └── <span class="built_in">test</span></span><br><span class="line">│             └── data</span><br><span class="line">├── framework</span><br><span class="line">│     ├── apksigner.jar</span><br><span class="line">│     ├── boot_signer.jar</span><br><span class="line">│     ├── signapk.jar</span><br><span class="line">│     └── verity_signer.jar</span><br><span class="line">├── lib64</span><br><span class="line">├── releasetools</span><br><span class="line">└── vendor</span><br><span class="line">    ├── huaqin</span><br><span class="line">    │     └── factory</span><br><span class="line">    │         └── BaseFactoryKit</span><br><span class="line">    │             └── keystore</span><br><span class="line">    ├── partner_modules</span><br><span class="line">    │     └── NetworkStackPrebuilt</span><br><span class="line">    │         ├── localtest</span><br><span class="line">    │         │     └── networkstack.x509.pem</span><br><span class="line">    │         └── networkstack.x509.pem</span><br><span class="line">    └── qcom</span><br><span class="line">        └── proprietary</span><br><span class="line">            └── prebuilt_HY11</span><br><span class="line">                └── target</span><br></pre></td></tr></table></figure>
 
-<h2 id="单独签名"><a href="#单独签名" class="headerlink" title="单独签名"></a>单独签名</h2><p><code>java -jar signapk.jar my.x509.pem my_private.pk8 my.apk my_signed.apk</code></p>
+<h2 id="做差分包所需文件（总结）"><a href="#做差分包所需文件（总结）" class="headerlink" title="做差分包所需文件（总结）"></a>做差分包所需文件（<strong>总结</strong>）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r build/target/product/security <span class="variable">$target</span></span><br><span class="line"><span class="built_in">cp</span> -r build/make/tools/releasetools <span class="variable">$target</span></span><br><span class="line"><span class="built_in">cp</span> -r out/host/linux-x86 <span class="variable">$target</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="根据target包生成ota差分包"><a href="#根据target包生成ota差分包" class="headerlink" title="根据target包生成ota差分包"></a>根据target包生成ota差分包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">build/make/tools/resleasetools/ota_from_target_files -k key_path -i old new output</span><br><span class="line">    -k/--package_key build/make/target/product/security/testkey：key cert路径</span><br><span class="line">    -i old.zip new.zip update.zip：差分包参数</span><br><span class="line">    -p/--path out/host/linux-x86：host out路径</span><br><span class="line">    -s/--device_specific ./device/qcom/common：指定了device-specific extension路径</span><br><span class="line">    -v/--verify：校验和，仅非A/B设备</span><br><span class="line">    --block：为非A/B设备生成基于块</span><br><span class="line">    --skip_compatibility_check：跳过包的兼容性检查</span><br><span class="line">    --override_timestamp：覆盖时间戳</span><br><span class="line">    --downgrade：允许降级</span><br></pre></td></tr></table></figure>
       
 
       
@@ -253,15 +220,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">apk</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">签名</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ota</a>
         		</li>
       		
 		</ul>
@@ -317,7 +276,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://www.mijm.site/2022/07/01/2022-7-1Android%20APK%E7%AD%BE%E5%90%8D/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://www.mijm.site/2022/07/01/2022-7-1OTA%E5%8D%87%E7%BA%A7/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -331,9 +290,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2022/07/01/2022-7-1Android%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Android系统介绍
+        
+      </div>
+    </a>
   
-    <a href="/2022/07/01/2022-7-1Android%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Android系统介绍</div>
+  
+    <a href="/2022/06/30/2022-6-30flask%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">flask基础</div>
       <i class="icon-circle-right"></i>
     </a>
   
