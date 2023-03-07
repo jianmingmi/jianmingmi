@@ -1,0 +1,288 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="&lt;p&gt;Android系统编译&lt;/p&gt;"><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><title>Android系统编译 | Mijm Blog</title><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Hexo 6.3.0"></head><body><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a class="sidebar-nav-item active" href="/">Home</a><a class="sidebar-nav-item" href="/archives">Archives</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-none-link" href="/tags/Android/" rel="tag">Android</a></div><div class="post-time">2022-07-03</div></div></div><div class="container post-header"><h1>Android系统编译</h1></div><div class="container post-toc"><details class="toc"><summary class="toc-accordion">Table of Contents</summary><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">1 概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Android%E7%BC%96%E8%AF%91%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">2.Android编译演进过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">3 编译流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%BC%96%E8%AF%91%E7%9B%AE%E5%BD%95"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 编译目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-soong%E7%BC%96%E8%AF%91%E6%9E%84%E6%88%90"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 soong编译构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-soong-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 soong 编译过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%BC%96%E8%AF%91%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">4 编译步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 编译环境初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-envsetup"><span class="toc-number">4.1.1.</span> <span class="toc-text">4.1.1 envsetup</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Lunch-%E8%AF%B4%E6%98%8E"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 Lunch 说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-Make"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 Make</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%BC%96%E8%AF%91%E9%93%BE%E8%AF%B4%E6%98%8E"><span class="toc-number">5.</span> <span class="toc-text">5 编译链说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Soong%E8%AF%B4%E6%98%8E"><span class="toc-number">5.1.</span> <span class="toc-text">5.1.Soong说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-kati%E8%AF%B4%E6%98%8E"><span class="toc-number">5.2.</span> <span class="toc-text">5.2.kati说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-blueprint%E8%AF%B4%E6%98%8E"><span class="toc-number">5.3.</span> <span class="toc-text">5.3.blueprint说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-ninja%E8%AF%B4%E6%98%8E"><span class="toc-number">5.4.</span> <span class="toc-text">5.4.ninja说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 编译工具链的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Ninja%E6%8F%90%E5%8D%87%E7%BC%96%E8%AF%91%E9%80%9F%E5%BA%A6%E6%96%B9%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">6.Ninja提升编译速度方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E7%BC%96%E8%AF%91%E5%88%86%E6%9E%90"><span class="toc-number">6.1.</span> <span class="toc-text">6.1编译分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-qninja%E6%8F%90%E5%8D%87%E7%BC%96%E8%AF%91%E9%80%9F%E5%BA%A6"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 qninja提升编译速度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">7.总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">8.</span> <span class="toc-text">参考</span></a></li></ol></details></div><div class="container post-content"><p>Android系统编译</p>
+<span id="more"></span>
+
+<h2 id="1-概要"><a href="#1-概要" class="headerlink" title="1 概要"></a>1 概要</h2><p>  在 Android 7.0 之前，Android 编译系统使用 GNU Make 描述和shell来构建编译规则，模块定义都使用Android.mk进行定义，Android.mk的本质就是Makefile，但是随着Android的工程越来越大，模块越来越多，Makefile组织的项目编译时间越来越长。这样下去Google工程师觉得不行，得要优化。</p>
+<p>  因此，在Android7.0开始，Google采用ninja来代取代之前使用的make，由于之前的Android.mk数据实在巨大，因此Google加入了一个kati工具，用于将Android.mk转换成ninja的构建规则文件buildxxx.ninja,再使用ninja来进行构建工作。</p>
+<p>  ninja的网址：<a target="_blank" rel="noopener" href="https://ninja-build.org/">https://ninja-build.org</a></p>
+<p>  编译速度快了一些，但是既然要干， 那就干个大的，最终目标要把make都取代，于是从Android8.0开始，Google为了进一步淘汰Makefile，因此引入了Android.bp文件来替换之前的Android.mk。</p>
+<p>  Android.bp只是一个纯粹的配置文件，不包括分支、循环语句等控制流程，本质上就是一个json配置文件。Android.bp  通过Blueprint+soong转换成ninja的构建规则文件build.ninja，再使用ninja来进行构建工作。</p>
+<p>  Android10.0上，mk和bp编译的列表可以从 \out.module_paths中的Android.bp.list、Android.mk.list中看到，Android10.0还有400多个mk文件没有被替换完，Google任重道远。</p>
+<h2 id="2-Android编译演进过程"><a href="#2-Android编译演进过程" class="headerlink" title="2.Android编译演进过程"></a>2.Android编译演进过程</h2><p> Android编译演进过程：</p>
+<p>Android7.0之前 使用GNU Make</p>
+<p>Android7.0 引入ninja、kati、Android.bp和soong构建系统</p>
+<p>Android8.0 默认打开Android.bp</p>
+<p>Android9.0 强制使用Android.bp</p>
+<p> Google在 Android 7.0之后，引入了Soong构建系统，旨在取代make，它利用 Kati GNU Make 克隆工具和 Ninja 构建系统组件来加速 Android 的构建。</p>
+<p> Make 构建系统得到了广泛的支持和使用，但在 Android 层面变得缓慢、容易出错、无法扩展且难以测试。Soong 构建系统正好提供了 Android build 所需的灵活性。</p>
+<p>Android系统的编译历程：</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_1.jpg"></p>
+<h2 id="3-编译流程"><a href="#3-编译流程" class="headerlink" title="3 编译流程"></a>3 编译流程</h2><h3 id="3-1-编译目录"><a href="#3-1-编译目录" class="headerlink" title="3.1 编译目录"></a>3.1 编译目录</h3><p>Android的编译目录在&#x2F;build 中，看一下Android 10源码中的build目录，现在是这个样子：</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_2.jpg"></p>
+<p>   这个目录中可以看到core文件夹被link到了make&#x2F;core，envsetup.sh被link到make&#x2F;envsetup.sh，这主要是为了对使用者屏蔽切换编译系统的差异。</p>
+<p>   这里重点看四个文件夹：blueprint、kati、make、soong</p>
+<p>   blueprint：用于处理Android.bp，编译生成*.ninja文件，用于做ninja的处理</p>
+<p>   kati：用于处理Android.mk，编译生成*.ninja文件，用于做ninja的处理</p>
+<p>   make：文件夹还是原始的make那一套流程，比如envsetup.sh</p>
+<p>   soong：构建系统，核心编译为soong_ui.bash</p>
+<h3 id="3-2-soong编译构成"><a href="#3-2-soong编译构成" class="headerlink" title="3.2 soong编译构成"></a>3.2 soong编译构成</h3><p>  在编译过程中，Android.bp会被收集到out&#x2F;soong&#x2F;build.ninja.d,blueprint以此为基础，生成out&#x2F;soong&#x2F;build.ninja</p>
+<p>  Android.mk会由kati&#x2F;ckati生成为out&#x2F;build-aosp_arm.ninja</p>
+<p>  两个ninja文件会被整合进入out&#x2F;combined-aosp_arm.ninja</p>
+<p>  Soong编译构成：</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_3.jpg"></p>
+<h3 id="3-3-soong-编译过程"><a href="#3-3-soong-编译过程" class="headerlink" title="3.3 soong 编译过程"></a>3.3 soong 编译过程</h3><p>  soong的编译过程如下图所示：</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_4.jpg"></p>
+<h2 id="4-编译步骤"><a href="#4-编译步骤" class="headerlink" title="4 编译步骤"></a>4 编译步骤</h2><p>编译时通常需要执行的编译命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">lunch aosp_arm-eng // 或者 m PRODUCT-aosp_x86_64-eng  ，Android10.0不一定需要lunch命令</span><br><span class="line">make -j8      //编译模块也可以直接用 m libart</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_5.jpg"></p>
+<h3 id="4-1-编译环境初始化"><a href="#4-1-编译环境初始化" class="headerlink" title="4.1 编译环境初始化"></a>4.1 编译环境初始化</h3><h4 id="4-1-1-envsetup"><a href="#4-1-1-envsetup" class="headerlink" title="4.1.1 envsetup"></a>4.1.1 envsetup</h4><p>envsetup.sh 主要做了下面几个事情：</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_6.jpg"></p>
+<p>在source build&#x2F;envsetup.sh后，输入hmm可以看到envsetup支持的一些接口：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lunch</td>
+<td>lunch <product_name>-<build_variant>。选择<product_name>作为要构建的产品，<build_variant>作为要构建的变体，并将这些选择存储在环境中，以便后续调用“m”等读取。</td>
+</tr>
+<tr>
+<td>tapas</td>
+<td>交互方式：tapas [<App1> <App2> …] [arm</td>
+</tr>
+<tr>
+<td>croot</td>
+<td>将目录更改到树的顶部或其子目录。</td>
+</tr>
+<tr>
+<td>m</td>
+<td>编译整个源码，可以不用切换到根目录</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>编译当前目录下的源码，不包含他们的依赖模块</td>
+</tr>
+<tr>
+<td>mmm</td>
+<td>编译指定目录下的所有模块，不包含他们的依赖模块   例如：mmm dir&#x2F;:target1,target2.</td>
+</tr>
+<tr>
+<td>mma</td>
+<td>编译当前目录下的源码，包含他们的依赖模块</td>
+</tr>
+<tr>
+<td>mmma</td>
+<td>编译指定目录下的所模块，包含他们的依赖模块</td>
+</tr>
+<tr>
+<td>provision</td>
+<td>具有所有必需分区的闪存设备。选项将传递给fastboot。</td>
+</tr>
+<tr>
+<td>cgrep</td>
+<td>对系统本地所有的C&#x2F;C++ 文件执行grep命令</td>
+</tr>
+<tr>
+<td>ggrep</td>
+<td>对系统本地所有的Gradle文件执行grep命令</td>
+</tr>
+<tr>
+<td>jgrep</td>
+<td>对系统本地所有的Java文件执行grep命令</td>
+</tr>
+<tr>
+<td>resgrep</td>
+<td>对系统本地所有的res目录下的xml文件执行grep命令</td>
+</tr>
+<tr>
+<td>mangrep</td>
+<td>对系统本地所有的AndroidManifest.xml文件执行grep命令</td>
+</tr>
+<tr>
+<td>mgrep</td>
+<td>对系统本地所有的Makefiles文件执行grep命令</td>
+</tr>
+<tr>
+<td>sepgrep</td>
+<td>对系统本地所有的sepolicy文件执行grep命令</td>
+</tr>
+<tr>
+<td>sgrep</td>
+<td>对系统本地所有的source文件执行grep命令</td>
+</tr>
+<tr>
+<td>godir</td>
+<td>根据godir后的参数文件名在整个目录下查找，并且切换目录</td>
+</tr>
+<tr>
+<td>allmod</td>
+<td>列出所有模块</td>
+</tr>
+<tr>
+<td>gomod</td>
+<td>转到包含模块的目录</td>
+</tr>
+<tr>
+<td>pathmod</td>
+<td>获取包含模块的目录</td>
+</tr>
+<tr>
+<td>refreshmod</td>
+<td>刷新allmod&#x2F;gomod的模块列表</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-Lunch-说明"><a href="#4-2-Lunch-说明" class="headerlink" title="4.2 Lunch 说明"></a>4.2 Lunch 说明</h3><p>  环境变量初始化完成后，我们需要选择一个编译目标。lunch 主要作用是根据用户输入或者选择的产品名来设置与具体产品相关的环境变量。</p>
+<p>  如果你不知道想要编译的目标是什么，直接执行一个lunch命令，会列出所有的目标，直接回车，会默认使用aosp_arm-eng这个目标。</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_7.jpg"></p>
+<p>执行命令：lunch 1， 可以看到配置的一些环境变量<br>这些环境变量的含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>lunch结果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PLATFORM_VERSION_CODENAME&#x3D;REL</td>
+<td>表示平台版本的名称</td>
+</tr>
+<tr>
+<td>PLATFORM_VERSION&#x3D;10</td>
+<td>Android平台的版本号</td>
+</tr>
+<tr>
+<td>TARGET_PRODUCT&#x3D;aosp_arm</td>
+<td>所编译的产品名称</td>
+</tr>
+<tr>
+<td>TARGET_BUILD_VARIANT&#x3D;userdebug</td>
+<td>所编译产品的类型</td>
+</tr>
+<tr>
+<td>TARGET_BUILD_TYPE&#x3D;release</td>
+<td>编译的类型，debug和release</td>
+</tr>
+<tr>
+<td>TARGET_ARCH&#x3D;arm</td>
+<td>表示编译目标的CPU架构</td>
+</tr>
+<tr>
+<td>TARGET_ARCH_VARIANT&#x3D;armv7-a-neon</td>
+<td>表示编译目标的CPU架构版本</td>
+</tr>
+<tr>
+<td>TARGET_CPU_VARIANT&#x3D;generic</td>
+<td>表示编译目标的CPU代号</td>
+</tr>
+<tr>
+<td>HOST_ARCH&#x3D;x86_64</td>
+<td>表示编译平台的架构</td>
+</tr>
+<tr>
+<td>HOST_2ND_ARCH&#x3D;x86</td>
+<td>表示编译平台的第二CPU架构</td>
+</tr>
+<tr>
+<td>HOST_OS&#x3D;linux</td>
+<td>表示编译平台的操作系统</td>
+</tr>
+<tr>
+<td>HOST_OS_EXTRA&#x3D;Linux-4.15.0-112-generic-x86_64-Ubuntu-16.04.6-LTS</td>
+<td>编译系统之外的额外信息</td>
+</tr>
+<tr>
+<td>HOST_CROSS_OS&#x3D;windows</td>
+<td></td>
+</tr>
+<tr>
+<td>HOST_CROSS_ARCH&#x3D;x86</td>
+<td></td>
+</tr>
+<tr>
+<td>HOST_CROSS_2ND_ARCH&#x3D;x86_64</td>
+<td></td>
+</tr>
+<tr>
+<td>HOST_BUILD_TYPE&#x3D;release</td>
+<td>编译类型</td>
+</tr>
+<tr>
+<td>BUILD_ID&#x3D;QQ1D.200205.002</td>
+<td>BUILD_ID会出现在版本信息中，可以利用</td>
+</tr>
+<tr>
+<td>OUT_DIR&#x3D;out</td>
+<td>编译结果输出的路径</td>
+</tr>
+</tbody></table>
+<h3 id="4-3-Make"><a href="#4-3-Make" class="headerlink" title="4.3 Make"></a>4.3 Make</h3><p>  执行完lunch命令后，就可以使用make命令来执行编译Build。</p>
+<p>  Android10.0上是通过soong执行编译构建，这里执行make命令时，main.mk文件把一些环境变量和目标都配置好后，会执行envsetup.sh中的make()进行编译</p>
+<p>  如果找到“build&#x2F;soong&#x2F;soong_ui.bash”，就使用soong_ui.bash 来进行编译，否则使用原始的make命令进行编译。</p>
+<p>  [build&#x2F;soong&#x2F;soong_ui.bash]配置一些资源环境，得到一些函数命令，例如：soong_build_go,最终回退到根目录，执行out&#x2F;soong_ui –make-mode进行真正的构建</p>
+<p>  soong_build_go soong_ui android&#x2F;soong&#x2F;cmd&#x2F;soong_ui  是通过编译android&#x2F;soong&#x2F;cmd&#x2F;soong_ui&#x2F;main.go来编译生成soong_ui.</p>
+<p>  根据[3.3]的图所示，执行runKatiBuild时，有个重要的步骤，就是加载build&#x2F;make&#x2F;core&#x2F;main.mk，main.mk文件是Android Build系统的主控文件。从main.mk开始，将通过include命令将其所有需要的.mk文件包含进来，最终在内存中形成一个包括所有编译脚本的集合，这个相当于一个巨大Makefile文件。Makefile文件看上去很庞大，其实主要由三种内容构成: 变量定义、函数定义和目标依赖规则，此外mk文件之间的包含也很重要。</p>
+<p>  main.mk的包含关系如下图所示：</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_8.jpg"></p>
+<h2 id="5-编译链说明"><a href="#5-编译链说明" class="headerlink" title="5 编译链说明"></a>5 编译链说明</h2><p>  Android10.0的编译系统中，涉及以下一些工具链，由这些工具链相辅相成，才最终编译出了我们所需要的镜像版本。</p>
+<p>  Android10.0编译工具链:</p>
+<p>  soong\kati\blueprint\ninja  </p>
+<h3 id="5-1-Soong说明"><a href="#5-1-Soong说明" class="headerlink" title="5.1.Soong说明"></a>5.1.Soong说明</h3><p>  Soong 构建系统是在 Android 7.0 (Nougat) 中引入的，旨在取代 Make。它利用 Kati GNU Make 克隆工具和 Ninja 构建系统组件来加速 Android 的构建。</p>
+<p>  Soong是由Go语言写的一个项目，从Android 7.0开始，在prebuilts&#x2F;go&#x2F;目录下新增了Go语言所需的运行环境，Soong在编译时使用，解析Android.bp，将之转化为Ninja文件，完成Android的选择编译，解析配置工作等。故Soong相当于Makefile编译系统的核心，即build&#x2F;make&#x2F;core下面的内容。</p>
+<p>  另外Soong还会编译产生一个androidmk命令，可以用来手动将Android.mk转换成Android.bp文件。不过这只对无选择、循环等复杂流程控制的Android.mk生效。</p>
+<p>soong脚本和代码目录：&#x2F;build&#x2F;soong</p>
+<h3 id="5-2-kati说明"><a href="#5-2-kati说明" class="headerlink" title="5.2.kati说明"></a>5.2.kati说明</h3><p>  kati是一个基于Makefile来生成ninja.build的小项目。主要用于把Makefiel转成成ninja file，自身没有编译能力，转换后使用Ninja编译。</p>
+<p>  在编译过程中，kati负责把既有的Makefile、Android.mk文件，转换成Ninja文件。在Android 8.0以后，它与Soong一起，成为Ninja文件的两大来源。Kati更像是Google过渡使用的一个工具，等所有Android.mk都被替换成Android.bp之后，Kati有可能退出Android编译过程.</p>
+<p>  在单独使用时，它对普通的小项目还能勉强生效。面对复杂的、多嵌套的Makefile时，它往往无法支持，会出现各种各样的问题。当然，也可以理解为，它只为Android而设计。</p>
+<p>  kati脚本和代码目录：&#x2F;build&#x2F;kati</p>
+<p>  详细说明请参考：</p>
+<p>  Kati详解-Android10.0编译系统（五）</p>
+<h3 id="5-3-blueprint说明"><a href="#5-3-blueprint说明" class="headerlink" title="5.3.blueprint说明"></a>5.3.blueprint说明</h3><p>  Blueprint由Go语言编写，是生成、解析Android.bp的工具，是Soong的一部分。Soong则是专为Android编译而设计的工具，Blueprint只是解析文件的形式，而Soong则解释内容的含义。</p>
+<p>在Android编译最开始的准备阶段，会执行build&#x2F;soong&#x2F;soong_ui.bash进行环境准备。 </p>
+<p>对blueprint项目编译完成之后会在out&#x2F;soong&#x2F;host&#x2F;linux-x86&#x2F;bin目录下生成soong编译需要的5个执行文件(bpfix,bpfmt,bpmodify,microfatory,bpmodify)。</p>
+<p>  Soong是与Android强关联的一个项目，而Blueprint则相对比较独立，可以单独编译、使用。</p>
+<p>  blueprint代码目录：&#x2F;build&#x2F;blueprint</p>
+<pre><code> 详细说明请参考：
+
+Blueprint简介-Android10.0编译系统（六）
+</code></pre>
+<h3 id="5-4-ninja说明"><a href="#5-4-ninja说明" class="headerlink" title="5.4.ninja说明"></a>5.4.ninja说明</h3><p>  最开始，Ninja 是用于Chromium 浏览器中，Android 在SDK 7.0 中也引入了Ninja。</p>
+<p>Ninja是一个致力于速度的小型编译系统（类似于Make），如果把其他编译系统比做高级语言的话，Ninja就是汇编语言。通常使用Kati或soong把makefile转换成Ninja files，然后用Ninja编译。</p>
+<p>  主要两个特点：</p>
+<p>  1)可以通过其他高级的编译系统生成其输入文件；</p>
+<p>  2)它的设计就是为了更快的编译；</p>
+<p>  ninja核心是由C&#x2F;C++编写的，同时有一部分辅助功能由python和shell实现。由于其开源性，所以可以利用ninja的开源代码进行各种个性化的编译定制。</p>
+<p>  详细说明请参考：</p>
+<p>  Ninja简介-Android10.0编译系统（九）</p>
+<h3 id="5-5-编译工具链的关系"><a href="#5-5-编译工具链的关系" class="headerlink" title="5.5 编译工具链的关系"></a>5.5 编译工具链的关系</h3><p> Android.mk文件、Android.bp、kati、Soong、Blueprint、Ninja之间的关系如下：</p>
+<p>  Android.bp –&gt; Blueprint –&gt; Soong –&gt; Ninja </p>
+<p> Makefile or Android.mk –&gt; kati –&gt; Ninja </p>
+<p>  (Android.mk –&gt; Soong –&gt; Blueprint –&gt; Android.bp)</p>
+<p>  Android.bp通过Blueprint工具链进行解析，通过Soong流程编译成build.ninja</p>
+<p>Android.mk通过kati\ckati工具链进行解析编译，生成out&#x2F;build-<product_name>.ninja。</p>
+<p>  然后Soong的编译流程会把生成的几个ninja文件组合成为out&#x2F;combined-<product_name>.ninja。</p>
+<p>  最后通过Ninja工具，来解析out&#x2F;combined-<product_name>.ninja执行最终的编译。</p>
+<h2 id="6-Ninja提升编译速度方法"><a href="#6-Ninja提升编译速度方法" class="headerlink" title="6.Ninja提升编译速度方法"></a>6.Ninja提升编译速度方法</h2><h3 id="6-1编译分析"><a href="#6-1编译分析" class="headerlink" title="6.1编译分析"></a>6.1编译分析</h3><p>在每次启动编译的时候，soong都要重新收集所有的文件、.mk、.bp的修改，然后重新生成build.ninja，在合并成combined-aosp_arm.ninja，这要花费大量的时间。</p>
+<p>  如下图所示整个编译过程，准备过程非常冗长。</p>
+<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_9.jpg"></p>
+<pre><code>大部分情况下，研发的工作是不断的修改.c .h .cpp .java 然后增量，此时真正的编译工作是非常少的，这样相对而言，准备工作往往是占大头的，所以我们可以考虑舍弃combined-aosp_arm.ninja之前的准备过程。
+</code></pre>
+<h3 id="6-2-qninja提升编译速度"><a href="#6-2-qninja提升编译速度" class="headerlink" title="6.2 qninja提升编译速度"></a>6.2 qninja提升编译速度</h3><p>   根据上一节分析到，舍弃combined-aosp_arm.ninja的准备过程，直接指向ninja可以提升速率，因此我们可以开发一个快速的编译命令，来提升研发的编译效率。</p>
+<pre><code>我们可以在修改build/make/envsetup.sh，新增一个qninja函数。
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function qninja()</span><br><span class="line">&#123;</span><br><span class="line">    local cmdline=&quot;time prebuilts/build-tools/linux-x86/bin/ninja -v -d keepdepfile $@ -f out/combined-aosp_arm.ninja -w dupbuild=warn&quot;</span><br><span class="line">    echo $cmdline</span><br><span class="line">    $cmdline</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只是修改了某个模块中的.c .h .cpp .java后，进行增量，编译命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source build/envsetup.sh</span><br><span class="line">qninja init_system</span><br></pre></td></tr></table></figure>
+
+<p>最终的编译时间仅仅花费了5秒：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">real    0m5.351s</span><br><span class="line">user    0m14.752s</span><br><span class="line">sys     0m3.201s</span><br></pre></td></tr></table></figure>
+<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7.总结"></a>7.总结</h2><pre><code>Android10.0的编译系统到这基本上做了大体的简要说明，Android编译系统非常庞杂和细致，还有比如最新的VINTF的manifest编译，内核新增的GKI Kernel编译等，这些都需要在工作中花费大量的时间去研究，但是现在最终的流程都绕不过 blueprint\kati\soong\ninja的编译流程，所以掌握好基础的知识，才能更快的理解新的编译模块及流程。
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yiranfeng/article/details/109708105">Android10.0编译系统</a></p>
+</div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/lato-font/3.0.0/css/lato-font.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcdn.net/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+  $(".fancybox").fancybox();
+});
+</script></body></html>

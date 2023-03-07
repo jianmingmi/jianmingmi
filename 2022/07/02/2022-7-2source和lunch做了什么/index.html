@@ -1,0 +1,134 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="&lt;p&gt;source和lunch做了什么&lt;/p&gt;"><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><title>source和lunch做了什么 | Mijm Blog</title><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Hexo 6.3.0"></head><body><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a class="sidebar-nav-item active" href="/">Home</a><a class="sidebar-nav-item" href="/archives">Archives</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-none-link" href="/tags/Android/" rel="tag">Android</a></div><div class="post-time">2022-07-02</div></div></div><div class="container post-header"><h1>source和lunch做了什么</h1></div><div class="container post-toc"><details class="toc"><summary class="toc-accordion">Table of Contents</summary><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-source-build-x2F-envsetup-sh"><span class="toc-number">1.</span> <span class="toc-text">1. source build&#x2F;envsetup.sh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#envsetup-sh%E4%B8%BB%E8%A6%81%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">envsetup.sh主要方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#envsetup-sh%E5%85%B6%E4%B8%BB%E8%A6%81%E4%BD%9C%E7%94%A8%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">envsetup.sh其主要作用如下：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-lunch"><span class="toc-number">2.</span> <span class="toc-text">2.lunch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol></details></div><div class="container post-content"><p>source和lunch做了什么</p>
+<span id="more"></span>
+
+<blockquote>
+<p>Android的优势就在于其开源，手机和平板生产商可以根据自己的硬件进行个性定制自己的手机<br>在我们在对Android的源码进行定制的时候，很有必要了解下，Android的编译过程。</p>
+</blockquote>
+<blockquote>
+<p>如果你从来没有做过Android代码的编译，那么最官方的编译过程就是查看Android的官方网站：<code>http://source.android.com/source/building.html</code></p>
+</blockquote>
+<hr>
+<p>按照<code>google</code>给出的编译步骤如下：</p>
+<ol>
+<li><code>source build/envsetup.sh</code>: 加载命令</li>
+<li><code>lunch</code>：选择平台编译选项</li>
+<li><code>make</code>：执行编译</li>
+</ol>
+<h2 id="1-source-build-x2F-envsetup-sh"><a href="#1-source-build-x2F-envsetup-sh" class="headerlink" title="1. source build&#x2F;envsetup.sh"></a>1. source build&#x2F;envsetup.sh</h2><p>这个命令是用来将<code>envsetup.sh</code>里的所有用到的命令加载到环境变量里去，我们来分析下它。</p>
+<h3 id="envsetup-sh主要方法"><a href="#envsetup-sh主要方法" class="headerlink" title="envsetup.sh主要方法"></a><code>envsetup.sh</code>主要方法</h3><ul>
+<li><code>hmm</code>显示帮助信息</li>
+<li><code>build_build_var_cache</code></li>
+<li><code>destroy_build_var_cache</code></li>
+<li><code>get_abs_build_var</code>获取绝对变量</li>
+<li><code>get_build_var</code>获取绝对变量</li>
+<li><code>check_product</code>检查product</li>
+<li><code>check_variant</code>检查变量</li>
+<li><code>setpaths</code> 设置文件路径</li>
+<li><code>printconfig</code>打印配置</li>
+<li><code>set_stuff_for_environment</code>设置环境变量</li>
+<li><code>set_sequence_number</code>设置序号</li>
+<li><code>should_add_completion</code></li>
+<li><code>addcompletions</code></li>
+<li><code>choosetype</code>设置type</li>
+<li><code>chooseproduct</code>设置product</li>
+<li><code>choosevariant</code>设置variant</li>
+<li><code>choosecombo</code>设置编译参数</li>
+<li><code>add_lunch_combo</code>添加lunch项目</li>
+<li><code>print_lunch_menu</code>打印lunch列表</li>
+<li><code>lunch</code>配置lunch</li>
+<li><code>_lunch</code></li>
+<li><code>tapas</code>功能同choosecombo</li>
+<li><code>gettop</code></li>
+<li><code>m</code>make from top</li>
+<li><code>findmakefile</code>查找makefile</li>
+<li><code>mm</code>make from current directory</li>
+<li><code>mmm</code>make the supplied directories</li>
+<li><code>mma</code>Builds all of the modules in the current directory, and their dependencies.</li>
+<li><code>mmma</code>Builds all of the modules in the supplied directories, and their dependencies.</li>
+<li><code>croot</code>Changes directory to the top of the tree, or a subdirectory thereof.</li>
+<li><code>_croot</code></li>
+<li><code>cproj</code></li>
+<li><code>qpid</code></li>
+<li><code>coredump_setup</code></li>
+<li><code>coredump_enable</code></li>
+<li><code>core</code></li>
+<li><code>systemstack</code></li>
+<li><code>is64bit</code></li>
+<li><code>sgrep</code>Greps on all local source files.</li>
+<li><code>gettargetarch</code></li>
+<li><code>ggrep</code>Greps on all local Gradle files.</li>
+<li><code>jgrep</code>Greps on all local Java files.</li>
+<li><code>cgrep</code>Greps on all local C&#x2F;C++ files.</li>
+<li><code>resgrep</code>Greps on all local res&#x2F;*.xml files.</li>
+<li><code>mangrep</code>Greps on all local AndroidManifest.xml files.</li>
+<li><code>sepgrep</code>Greps on all local sepolicy files.</li>
+<li><code>rcgrep</code></li>
+<li><code>mgrep</code>Greps on all local Makefiles files.</li>
+<li><code>treegrep</code></li>
+<li><code>getprebuilt</code></li>
+<li><code>tracedmdump</code></li>
+<li><code>runhat</code></li>
+<li><code>getbugreports</code></li>
+<li><code>getsdcardpath</code></li>
+<li><code>getscreenshotpath</code></li>
+<li><code>getlastscreenshot</code></li>
+<li><code>startviewserver</code></li>
+<li><code>stopviewserver</code></li>
+<li><code>isviewserverstarted</code></li>
+<li><code>key_home</code></li>
+<li><code>key_back</code></li>
+<li><code>key_menu</code></li>
+<li><code>smoketest</code></li>
+<li><code>runtest</code></li>
+<li><code>godir</code>Go to the directory containing a file.</li>
+<li><code>refreshmod</code>Refresh list of modules for allmod&#x2F;gomod.</li>
+<li><code>allmod</code>List all modules.</li>
+<li><code>pathmod</code>Get the directory containing a module.</li>
+<li><code>gomod</code>Go to the directory containing a module.</li>
+<li><code>_complete_android_module_names</code></li>
+<li><code>pez</code></li>
+<li><code>get_make_command</code></li>
+<li><code>_wrap_build</code></li>
+<li><code>make</code></li>
+<li><code>provision</code></li>
+<li><code>enable_zsh_completion</code></li>
+<li><code>validate_current_shell</code></li>
+<li><code>check_type</code></li>
+<li><code>source_vendorsetup</code></li>
+</ul>
+<h3 id="envsetup-sh其主要作用如下："><a href="#envsetup-sh其主要作用如下：" class="headerlink" title="envsetup.sh其主要作用如下："></a><code>envsetup.sh</code>其主要作用如下：</h3><ol>
+<li>加载了编译时使用到的函数命令，如：<code>help，lunch，m，mm，mmm</code>等</li>
+<li>添加了两个编译选项：<code>generic-eng</code>和<code>simulator</code>，这两个选项是系统默认选项</li>
+<li>查找<code>vendor/&lt;-厂商目录&gt;/</code>和<code>vendor/&lt;厂商目录&gt;/build/</code>目录下的<code>vendorsetup.sh</code>，如果存在的话，加载执行它，添加厂商自己定义产品的编译选项</li>
+</ol>
+<p>其实，上述第3条是向编译系统添加了厂商自己定义产品的编译选项，里面的代码就是：<code>add_lunch_combo xxx-xxx</code>。</p>
+<p>根据上面的内容，可以推测出，如果要想定义自己的产品编译项，简单的办法是直接在<code>envsetup.sh</code>最后，添加上<code>add_lunch_combo myProduct-eng</code>，当然这么做，不太符合上面代码最后的本意，我们还是老实的在<code>vendor</code>目录下创建自己公司名字，然后在公司目录下创建一个新的<code>vendorsetup.sh</code>，在里面添加上自己的产品编译项</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#mkdir vendor/&lt;厂商目录&gt;/</span></span><br><span class="line"><span class="comment">#touch vendor/&lt;厂商目录&gt;/vendorsetup.sh</span></span><br><span class="line"><span class="comment">#echo &quot;add_lunch_combo fs100-eng&quot; &gt; vendor/&lt;厂商目录&gt;/vendorsetup.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，当我们在执行<code>source build/envsetup.sh</code>命令的时候，可以在<code>shell</code>上看到下面的信息：<br><code>including vendor/farsight/vendorsetup.sh</code></p>
+<h2 id="2-lunch"><a href="#2-lunch" class="headerlink" title="2.lunch"></a>2.lunch</h2><p>按照<code>android</code>官网的步骤，开始执行<code>lunch full-eng</code></p>
+<p>当然如果你按上述命令执行，它编译的还是通用的eng版本系统，不是我们个性系统，我们可以执行<code>lunch</code>命令，它会打印出一个选择菜单，列出可用的编译选项</p>
+<p>如果你按照第一步中添加了<code>vendorsetup.sh</code>那么，你的选项中会出现：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">You<span class="string">&#x27;re building on Linux</span></span><br><span class="line"><span class="string">generic-eng simulator fs100-eng</span></span><br><span class="line"><span class="string">Lunch menu... pick a combo:</span></span><br><span class="line"><span class="string">  1. generic-eng</span></span><br><span class="line"><span class="string">  2. simulator</span></span><br><span class="line"><span class="string">  3. fs100-eng</span></span><br></pre></td></tr></table></figure>
+
+<p>其中第3项是我们自己添加的编译项。</p>
+<p><code>lunch</code>命令是<code>envsetup.sh</code>里定义的一个命令，用来让用户选择编译项，来定义<code>Product</code>和编译过程中用到的全局变量。</p>
+<p>我们一直没有说明前面的<code>fs100-eng</code>是什么意思，现在来说明下，<code>fs100</code>是我定义的产品的名字，<code>eng</code>是产品的编译类型，除了eng外，还有<code>user, userdebug</code>，分别表示：</p>
+<ul>
+<li>eng: 工程机，</li>
+<li>user:最终用户机</li>
+<li>userdebug:调试测试机</li>
+<li>tests:测试机</li>
+</ul>
+<p>那么这四个类型是干什么用的呢？其实，在<code>main.mk</code>里有说明，在Android的源码里，每一个目标（也可以看成工程）目录都有一个<code>Android.mk</code>的<code>makefile</code>，每个目标的Android.mk中有一个类型声明：<code>LOCAL_MODULE_TAGS</code>，这个<code>TAGS</code>就是用来指定，当前的目标编译完了属于哪个分类里。</p>
+<p>PS:<code>Android.mk</code>和<code>Linux</code>里的<code>makefile</code>不太一样，它是<code>Android</code>编译系统自己定义的一个<code>makefile</code>来方便编译成：c,c++的动态、静态库或可执行程序，或<code>java</code>库或<code>android</code>的程序，</p>
+<p>好了，我们来分析下lunch命令干了什么？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">lunch</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">local</span> answer</span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ] ; <span class="keyword">then</span></span><br><span class="line">    </span><br><span class="line">       <span class="comment"># lunch后面直接带参数</span></span><br><span class="line">        answer=<span class="variable">$1</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">       <span class="comment"># lunch后面不带参数，则打印处所有的target product和variant菜单提供用户选择</span></span><br><span class="line">        print_lunch_menu  </span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">&quot;Which would you like? [generic-eng] &quot;</span></span><br><span class="line">        <span class="built_in">read</span> answer</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">local</span> selection=</span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$answer</span>&quot;</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">           <span class="comment"># 如果用户在菜单中没有选择，直接回车，则为系统缺省的generic-eng</span></span><br><span class="line">        selection=generic-eng</span><br><span class="line">    <span class="keyword">elif</span> [ <span class="string">&quot;<span class="variable">$answer</span>&quot;</span> = <span class="string">&quot;simulator&quot;</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="comment"># 如果是模拟器</span></span><br><span class="line">        selection=simulator</span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">echo</span> -n <span class="variable">$answer</span> | grep -q -e <span class="string">&quot;^[0-9][0-9]*$&quot;</span>)</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="comment"># 如果answer是选择菜单的数字，则获取该数字对应的字符串</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$answer</span> -le <span class="variable">$&#123;#LUNCH_MENU_CHOICES[@]&#125;</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            selection=<span class="variable">$&#123;LUNCH_MENU_CHOICES[$(($answer-$_arrayoffset))]&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="comment"># 如果 answer字符串匹配 *-*模式(*的开头不能为-)</span></span><br><span class="line">    <span class="keyword">elif</span> (<span class="built_in">echo</span> -n <span class="variable">$answer</span> | grep -q -e <span class="string">&quot;^[^\-][^\-]*-[^\-][^\-]*$&quot;</span>)</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        selection=<span class="variable">$answer</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$selection</span>&quot;</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Invalid lunch combo: <span class="variable">$answer</span>&quot;</span></span><br><span class="line">        <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="comment"># special case the simulator</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$selection</span>&quot;</span> = <span class="string">&quot;simulator&quot;</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="comment"># 模拟器模式</span></span><br><span class="line">        <span class="built_in">export</span> TARGET_PRODUCT=sim</span><br><span class="line">        <span class="built_in">export</span> TARGET_BUILD_VARIANT=eng</span><br><span class="line">        <span class="built_in">export</span> TARGET_SIMULATOR=<span class="literal">true</span></span><br><span class="line">        <span class="built_in">export</span> TARGET_BUILD_TYPE=debug</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 将 product-variant模式中的product分离出来</span></span><br><span class="line">        <span class="built_in">local</span> product=$(<span class="built_in">echo</span> -n <span class="variable">$selection</span> | sed -e <span class="string">&quot;s/-.*$//&quot;</span>)</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 检查之，调用关系 check_product()-&gt;get_build_var()-&gt;build/core/config.mk比较罗嗦，不展开了</span></span><br><span class="line">        check_product <span class="variable">$product</span></span><br><span class="line">        <span class="keyword">if</span> [ $? -ne 0 ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;** Don&#x27;t have a product spec for: &#x27;<span class="variable">$product</span>&#x27;&quot;</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;** Do you have the right repo manifest?&quot;</span></span><br><span class="line">            product=</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 将 product-variant模式中的variant分离出来</span></span><br><span class="line">        <span class="built_in">local</span> variant=$(<span class="built_in">echo</span> -n <span class="variable">$selection</span> | sed -e <span class="string">&quot;s/^[^\-]*-//&quot;</span>)</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># 检查之，看看是否在 (user userdebug eng) 范围内</span></span><br><span class="line">        check_variant <span class="variable">$variant</span></span><br><span class="line">        <span class="keyword">if</span> [ $? -ne 0 ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;** Invalid variant: &#x27;<span class="variable">$variant</span>&#x27;&quot;</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;** Must be one of <span class="variable">$&#123;VARIANT_CHOICES[@]&#125;</span>&quot;</span></span><br><span class="line">            variant=</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    </span><br><span class="line">        <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$product</span>&quot;</span> -o -z <span class="string">&quot;<span class="variable">$variant</span>&quot;</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span></span><br><span class="line">            <span class="built_in">return</span> 1</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="comment">#  导出环境变量，这里很重要，因为后面的编译系统都是依赖于这里定义的几个变量的</span></span><br><span class="line">        <span class="built_in">export</span> TARGET_PRODUCT=<span class="variable">$product</span></span><br><span class="line">        <span class="built_in">export</span> TARGET_BUILD_VARIANT=<span class="variable">$variant</span></span><br><span class="line">        <span class="built_in">export</span> TARGET_SIMULATOR=<span class="literal">false</span></span><br><span class="line">        <span class="built_in">export</span> TARGET_BUILD_TYPE=release</span><br><span class="line">    <span class="keyword">fi</span> <span class="comment"># !simulator</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 设置到环境变量，比较多，不再一一列出，最简单的方法 set &gt;env.txt 可获得</span></span><br><span class="line">    set_stuff_for_environment</span><br><span class="line">    <span class="comment"># 打印一些主要的变量, 调用关系 printconfig()-&gt;get_build_var()-&gt;build/core/config.mk-&gt;build/core/envsetup.mk 比较罗嗦，不展开了</span></span><br><span class="line">    printconfig</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由上面分析可知，lunch命令可以带参数和不带参数，最终导出一些重要的环境变量，从而影响编译系统的编译结果。导出的变量如下（以实际运行情况为例）</p>
+<p>TARGET_PRODUCT&#x3D;fs100<br>TARGET_BUILD_VARIANT&#x3D;eng<br>TARGET_SIMULATOR&#x3D;false<br>TARGET_BUILD_TYPE&#x3D;release</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15127616/4235691">Android编译详解之lunch命令</a></p>
+</div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/lato-font/3.0.0/css/lato-font.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcdn.net/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+  $(".fancybox").fancybox();
+});
+</script></body></html>
