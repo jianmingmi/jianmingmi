@@ -1,7 +1,8 @@
 ---
+uuid: 105c28f5-bcd3-11ed-abae-3fce2bc8128b
 title: Android.mk和Android.bp
 date: 2022-7-2
-tags: [android, mk, bp]
+tags: [Android]
 ---
 
 Android.mk和Android.bp

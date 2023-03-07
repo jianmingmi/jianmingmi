@@ -1,7 +1,8 @@
 ---
+uuid: 105c01e2-bcd3-11ed-abae-3fce2bc8128b
 title: git merge策略解析
 date: 2022-6-26
-tags: [git, merge, 策略]
+tags: [Git]
 ---
 
 git merge策略解析

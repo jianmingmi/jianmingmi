@@ -1,7 +1,8 @@
 ---
+uuid: 105c28f1-bcd3-11ed-abae-3fce2bc8128b
 title: Android APK签名
 date: 2022-7-1
-tags: [android, apk, 签名]
+tags: [Apk]
 ---
 
 Android APK签名
