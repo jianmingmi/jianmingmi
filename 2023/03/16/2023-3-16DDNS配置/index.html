@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="&lt;p&gt;DDNS配置，以腾讯云为例&lt;/p&gt;"><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><title>DDNS配置 | Mijm Blog</title><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Hexo 6.3.0"></head><body><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a class="sidebar-nav-item active" href="/">Home</a><a class="sidebar-nav-item" href="/archives">Archives</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-none-link" href="/tags/Linux/" rel="tag">Linux</a></div><div class="post-time">2023-03-16</div></div></div><div class="container post-header"><h1>DDNS配置</h1></div><div class="container post-content"><p>DDNS配置，以腾讯云为例</p>
+<span id="more"></span>
+
+<p>前提：<code>wan进口地址就有公网IP</code></p>
+<ol>
+<li>添加域名解析记录</li>
+<li>获取域名解析记录<br> <a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/api/explorer">https://console.cloud.tencent.com/api/explorer</a><br> DNSPod &gt; 获取域名的解析记录 &gt; 找到RecordID</li>
+<li>修改接口，生成代码<br> DNSPod &gt; 修改记录<br> Domain ： 填写你的一级域名，如baidu.com<br> RecordType： 记录类型，这里使用的ipv4，所以填写A<br> RecordLine： 记录线路，添加默认即可<br> Value： IP地址，随便填写个值，后面会通过脚本自动获取替换<br> RecordId： 记录ID，上一步骤生成的值<br> SubDomain ： 二级域名，如果不填写，则默认修改@记录</li>
+<li>生成SecretId、SecretKey<br> <a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam/capi">https://console.cloud.tencent.com/cam/capi</a></li>
+<li>安装依赖库<br> sudo pip3 install tencentcloud-sdk-python requests</li>
+<li>部署定时任务</li>
+</ol>
+</div></div><div class="post-main post-comment"></div></article><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/lato-font/3.0.0/css/lato-font.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcdn.net/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcdn.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+  $(".fancybox").fancybox();
+});
+</script></body></html>
