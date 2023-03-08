@@ -4,6 +4,8 @@ title: Android系统编译
 date: 2022-7-3
 tags:
   - Android
+categories:
+  - Android
 abbrlink: 135a8f34
 ---
 

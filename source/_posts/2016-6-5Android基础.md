@@ -4,6 +4,8 @@ title: Android基础
 date: 2016-6-5
 tags:
   - Android
+categories:
+  - Android
 abbrlink: 1e23c015
 ---
 

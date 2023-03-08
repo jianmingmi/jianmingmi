@@ -4,6 +4,8 @@ title: Android.mk和Android.bp
 date: 2022-7-2
 tags:
   - Android
+categories:
+  - Android
 abbrlink: 4078c0f
 ---
 

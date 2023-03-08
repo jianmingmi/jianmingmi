@@ -4,6 +4,8 @@ title: git merge策略解析
 date: 2022-6-26
 tags:
   - Git
+categories:
+  - Git
 abbrlink: 155e1a5b
 ---
 

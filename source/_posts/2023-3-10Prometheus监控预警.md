@@ -4,6 +4,8 @@ title: Prometheus监控预警
 date: 2023-3-10
 tags:
   - Linux
+categories:
+  - Linux
 abbrlink: f1885250
 ---
 
