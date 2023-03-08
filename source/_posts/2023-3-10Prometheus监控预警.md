@@ -10,6 +10,7 @@ Prometheus监控预警
 <!--more-->
 
 ## zabbix与Prometheus对比
+
 1. zabbix诞生的 时间更早 ，是比Prometheus 更成熟 的监控软件。
 2. 不过受制于时间，Prometheus的 编制语言 也会比zabbix更加简洁。
 3. zabbix支持 图形化配置 ，让它在 本地计算机 上使用会更方便和快捷。
