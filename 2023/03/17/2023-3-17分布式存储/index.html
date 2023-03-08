@@ -1,25 +1,27 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="&lt;p&gt;分布式存储&lt;/p&gt;"><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><title>分布式存储 | Mijm Blog</title><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Hexo 6.3.0"></head><body><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a class="sidebar-nav-item active" href="/">Home</a><a class="sidebar-nav-item" href="/archives">Archives</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-none-link" href="/tags/Linux/" rel="tag">Linux</a></div><div class="post-time">2023-03-17</div></div></div><div class="container post-header"><h1>分布式存储</h1></div><div class="container post-toc"><details class="toc"><summary class="toc-accordion">Table of Contents</summary><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAS-SAN-NAS"><span class="toc-number">1.</span> <span class="toc-text">DAS,SAN,NAS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E5%AD%98%E5%82%A8%EF%BC%8C%E6%96%87%E4%BB%B6%E5%82%A8%E5%AD%98%EF%BC%8C%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8"><span class="toc-number">2.</span> <span class="toc-text">块存储，文件储存，对象存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">3.</span> <span class="toc-text">分布式存储的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Artifactory%E9%83%A8%E7%BD%B2"><span class="toc-number">4.</span> <span class="toc-text">Artifactory部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Minio%E9%83%A8%E7%BD%B2"><span class="toc-number">5.</span> <span class="toc-text">Minio部署</span></a></li></ol></details></div><div class="container post-content"><p>分布式存储</p>
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="&lt;p&gt;分布式存储&lt;/p&gt;"><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/noise.css"><title>分布式存储 | Mijm Blog</title><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Hexo 6.3.0"></head><body><article class="wrapper"><div class="post-main"><div class="nav"><nav class="container"><a class="sidebar-nav-item active" href="/">Home</a><a class="sidebar-nav-item" href="/archives">Archives</a></nav><div class="container post-meta"><div class="post-tags"><a class="post-tag-none-link" href="/tags/Linux/" rel="tag">Linux</a></div><div class="post-time">2023-03-17</div></div></div><div class="container post-header"><h1>分布式存储</h1></div><div class="container post-toc"><details class="toc"><summary class="toc-accordion">Table of Contents</summary><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAS%E3%80%81SAN%E3%80%81NAS"><span class="toc-number">1.</span> <span class="toc-text">DAS、SAN、NAS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E5%AD%98%E5%82%A8%E3%80%81%E6%96%87%E4%BB%B6%E5%82%A8%E5%AD%98%E3%80%81%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8"><span class="toc-number">2.</span> <span class="toc-text">块存储、文件储存、对象存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">3.</span> <span class="toc-text">分布式存储的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Artifactory%E9%83%A8%E7%BD%B2"><span class="toc-number">4.</span> <span class="toc-text">Artifactory部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Minio%E9%83%A8%E7%BD%B2"><span class="toc-number">5.</span> <span class="toc-text">Minio部署</span></a></li></ol></details></div><div class="container post-content"><p>分布式存储</p>
 <span id="more"></span>
 
-<h2 id="DAS-SAN-NAS"><a href="#DAS-SAN-NAS" class="headerlink" title="DAS,SAN,NAS"></a>DAS,SAN,NAS</h2><p>(1).DAS(Direct Attached Storage)—直连式存储，就是拿一根线把存储设备直接连接到PC机或服务器上，那比如u盘，是用的接口把自身的存储设备直接和PC相连接，DAS有一定的缺点，如果你电脑只有一个卡槽或者一个USB接口，那只能仅限于哪一个卡槽或者USB接口的存储量，也叫说扩展性差</p>
-<p>(2).SAN(Storage Area Network)—存储区域网络，它呢，是通过网络进行连接存储的，在DAS中只能通过一根线或者移动硬盘来连接存储设备，这有点不能满足人们的需求，于是SAN就通过网络来连接存储设备，这样存储目标就广泛了起来，(这种网络现在可以是以太网了–ip)</p>
-<p>DAS,SAN都属于块存储(下面讲解)。</p>
-<p>(3).NAS(Network Attached Storage)—网络附加存储，就是NAS需要通过网络来进行访问，只要是有网络来连接这个存储设备就行，它属于文件存储</p>
-<h2 id="块存储，文件储存，对象存储"><a href="#块存储，文件储存，对象存储" class="headerlink" title="块存储，文件储存，对象存储"></a>块存储，文件储存，对象存储</h2><p>1.块存储：首先DAS，SAN都属于块存储</p>
-<p>块存储就是块设备—-一切以磁盘的形式存在的存储就是块设备</p>
-<p>a.块存储强调的是裸磁盘</p>
-<p> b.所有以磁盘的形式直接提供给主机或服务器的设备都是块存储</p>
-<p>2.文件存储—基于网络的共享文件存储</p>
-<p>补充：文件系统：用来管理存储设备，和存储设备里面的数据，在主机终端去访问数据时不是直接访问的数据而是通过文件系统来进行对数据的查询，搜索…之后返回给中终端的。文件夹中有一级一级的目录对吧，那就是文件系统的功劳，有了文件系统数据目录才会有层次的展现给用户。</p>
-<p>文件存储就是在块存储的前面加上了一层文件系统，对外提供存储服务，说白了就是，“块设备+文件系统”打包就是文件存储。结合下图演示：</p>
+<h2 id="DAS、SAN、NAS"><a href="#DAS、SAN、NAS" class="headerlink" title="DAS、SAN、NAS"></a>DAS、SAN、NAS</h2><ol>
+<li><p>DAS(Direct Attached Storage)—直连式存储，就是拿一根线把存储设备直接连接到PC机或服务器上，那比如u盘，是用的接口把自身的存储设备直接和PC相连接，DAS有一定的缺点，如果你电脑只有一个卡槽或者一个USB接口，那只能仅限于哪一个卡槽或者USB接口的存储量，也叫说扩展性差</p>
+</li>
+<li><p>SAN(Storage Area Network)—存储区域网络，它呢，是通过网络进行连接存储的，在DAS中只能通过一根线或者移动硬盘来连接存储设备，这有点不能满足人们的需求，于是SAN就通过网络来连接存储设备，这样存储目标就广泛了起来，(这种网络现在可以是以太网了–ip)<br>DAS,SAN都属于块存储(下面讲解)。</p>
+</li>
+<li><p>NAS(Network Attached Storage)—网络附加存储，就是NAS需要通过网络来进行访问，只要是有网络来连接这个存储设备就行，它属于文件存储</p>
+</li>
+</ol>
+<h2 id="块存储、文件储存、对象存储"><a href="#块存储、文件储存、对象存储" class="headerlink" title="块存储、文件储存、对象存储"></a>块存储、文件储存、对象存储</h2><ol>
+<li><p>块存储：首先DAS，SAN都属于块存储<br>块存储就是块设备—-一切以磁盘的形式存在的存储就是块设备<br>a.块存储强调的是裸磁盘<br>b.所有以磁盘的形式直接提供给主机或服务器的设备都是块存储</p>
+</li>
+<li><p>文件存储—基于网络的共享文件存储<br>补充：文件系统：用来管理存储设备，和存储设备里面的数据，在主机终端去访问数据时不是直接访问的数据而是通过文件系统来进行对数据的查询，搜索…之后返回给中终端的。文件夹中有一级一级的目录对吧，那就是文件系统的功劳，有了文件系统数据目录才会有层次的展现给用户。<br>文件存储就是在块存储的前面加上了一层文件系统，对外提供存储服务，说白了就是，“块设备+文件系统”打包就是文件存储。结合下图演示：</p>
+</li>
+</ol>
 <p><img src="/images/2023-3-17%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8/1.png"></p>
-<p>3.块存储和文件储存的优缺点</p>
-<p>块存储：优点：读写速度快，可扩展性差，不易于共享</p>
-<p>文件存储：优点：易于共享，读写速度慢</p>
-<p>4.对象存储</p>
-<p>对象存储就是一个全新的存储港式，它结合了块存储和文件存储的优点</p>
-<p>特点：读写速度快，易于共享，扩展性强</p>
-<p>对象存储和文件存储的文件系统完全不同，对象存储的文件系统时二层架构，文件存储用的传统的目录层结构的文件系统，就是在D盘建一个文件夹，在文件夹里面在建一个文件夹，然后在建文件夹等等，这就是目录结构的文件系统，那如果是这样，会降低存储的性能。</p>
+<ol start="3">
+<li><p>块存储和文件储存的优缺点<br>块存储：优点：读写速度快，可扩展性差，不易于共享<br>文件存储：优点：易于共享，读写速度慢</p>
+</li>
+<li><p>对象存储<br>对象存储就是一个全新的存储港式，它结合了块存储和文件存储的优点<br>特点：读写速度快，易于共享，扩展性强<br>对象存储和文件存储的文件系统完全不同，对象存储的文件系统时二层架构，文件存储用的传统的目录层结构的文件系统，就是在D盘建一个文件夹，在文件夹里面在建一个文件夹，然后在建文件夹等等，这就是目录结构的文件系统，那如果是这样，会降低存储的性能。</p>
+</li>
+</ol>
 <p><img src="/images/2023-3-17%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8/2.png"></p>
 <h2 id="分布式存储的优势"><a href="#分布式存储的优势" class="headerlink" title="分布式存储的优势"></a>分布式存储的优势</h2><ol>
 <li>高可靠性：分布式存储有一个非常厉害的手段就是多时间点快照技术，可以让用户在一定的时间能够对各个版本数据进行备份，多时间点技术可以支持同时提取多个时间点的样本，并且能够在同一时间恢复数据。这项技术对于出现存储问题是非常有帮助的，并且避免存储问题产生的损失问题。多时间点快照为企业带来了非常可靠安心的数据安全保障。</li>
