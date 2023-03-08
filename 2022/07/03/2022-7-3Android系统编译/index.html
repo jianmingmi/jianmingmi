@@ -15,9 +15,9 @@
 <p> Google在 Android 7.0之后，引入了Soong构建系统，旨在取代make，它利用 Kati GNU Make 克隆工具和 Ninja 构建系统组件来加速 Android 的构建。</p>
 <p> Make 构建系统得到了广泛的支持和使用，但在 Android 层面变得缓慢、容易出错、无法扩展且难以测试。Soong 构建系统正好提供了 Android build 所需的灵活性。</p>
 <p>Android系统的编译历程：</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_1.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_1.jpg"></p>
 <h2 id="3-编译流程"><a href="#3-编译流程" class="headerlink" title="3 编译流程"></a>3 编译流程</h2><h3 id="3-1-编译目录"><a href="#3-1-编译目录" class="headerlink" title="3.1 编译目录"></a>3.1 编译目录</h3><p>Android的编译目录在&#x2F;build 中，看一下Android 10源码中的build目录，现在是这个样子：</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_2.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_2.png"></p>
 <p>   这个目录中可以看到core文件夹被link到了make&#x2F;core，envsetup.sh被link到make&#x2F;envsetup.sh，这主要是为了对使用者屏蔽切换编译系统的差异。</p>
 <p>   这里重点看四个文件夹：blueprint、kati、make、soong</p>
 <p>   blueprint：用于处理Android.bp，编译生成*.ninja文件，用于做ninja的处理</p>
@@ -28,15 +28,15 @@
 <p>  Android.mk会由kati&#x2F;ckati生成为out&#x2F;build-aosp_arm.ninja</p>
 <p>  两个ninja文件会被整合进入out&#x2F;combined-aosp_arm.ninja</p>
 <p>  Soong编译构成：</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_3.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_3.png"></p>
 <h3 id="3-3-soong-编译过程"><a href="#3-3-soong-编译过程" class="headerlink" title="3.3 soong 编译过程"></a>3.3 soong 编译过程</h3><p>  soong的编译过程如下图所示：</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_4.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_4.png"></p>
 <h2 id="4-编译步骤"><a href="#4-编译步骤" class="headerlink" title="4 编译步骤"></a>4 编译步骤</h2><p>编译时通常需要执行的编译命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">lunch aosp_arm-eng // 或者 m PRODUCT-aosp_x86_64-eng  ，Android10.0不一定需要lunch命令</span><br><span class="line">make -j8      //编译模块也可以直接用 m libart</span><br></pre></td></tr></table></figure>
 
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_5.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_5.png"></p>
 <h3 id="4-1-编译环境初始化"><a href="#4-1-编译环境初始化" class="headerlink" title="4.1 编译环境初始化"></a>4.1 编译环境初始化</h3><h4 id="4-1-1-envsetup"><a href="#4-1-1-envsetup" class="headerlink" title="4.1.1 envsetup"></a>4.1.1 envsetup</h4><p>envsetup.sh 主要做了下面几个事情：</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_6.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_6.png"></p>
 <p>在source build&#x2F;envsetup.sh后，输入hmm可以看到envsetup支持的一些接口：</p>
 <table>
 <thead>
@@ -136,7 +136,7 @@
 </tbody></table>
 <h3 id="4-2-Lunch-说明"><a href="#4-2-Lunch-说明" class="headerlink" title="4.2 Lunch 说明"></a>4.2 Lunch 说明</h3><p>  环境变量初始化完成后，我们需要选择一个编译目标。lunch 主要作用是根据用户输入或者选择的产品名来设置与具体产品相关的环境变量。</p>
 <p>  如果你不知道想要编译的目标是什么，直接执行一个lunch命令，会列出所有的目标，直接回车，会默认使用aosp_arm-eng这个目标。</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_7.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_7.png"></p>
 <p>执行命令：lunch 1， 可以看到配置的一些环境变量<br>这些环境变量的含义如下：</p>
 <table>
 <thead>
@@ -225,7 +225,7 @@
 <p>  soong_build_go soong_ui android&#x2F;soong&#x2F;cmd&#x2F;soong_ui  是通过编译android&#x2F;soong&#x2F;cmd&#x2F;soong_ui&#x2F;main.go来编译生成soong_ui.</p>
 <p>  根据[3.3]的图所示，执行runKatiBuild时，有个重要的步骤，就是加载build&#x2F;make&#x2F;core&#x2F;main.mk，main.mk文件是Android Build系统的主控文件。从main.mk开始，将通过include命令将其所有需要的.mk文件包含进来，最终在内存中形成一个包括所有编译脚本的集合，这个相当于一个巨大Makefile文件。Makefile文件看上去很庞大，其实主要由三种内容构成: 变量定义、函数定义和目标依赖规则，此外mk文件之间的包含也很重要。</p>
 <p>  main.mk的包含关系如下图所示：</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_8.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_8.png"></p>
 <h2 id="5-编译链说明"><a href="#5-编译链说明" class="headerlink" title="5 编译链说明"></a>5 编译链说明</h2><p>  Android10.0的编译系统中，涉及以下一些工具链，由这些工具链相辅相成，才最终编译出了我们所需要的镜像版本。</p>
 <p>  Android10.0编译工具链:</p>
 <p>  soong\kati\blueprint\ninja  </p>
@@ -266,7 +266,7 @@ Blueprint简介-Android10.0编译系统（六）
 <p>  最后通过Ninja工具，来解析out&#x2F;combined-<product_name>.ninja执行最终的编译。</p>
 <h2 id="6-Ninja提升编译速度方法"><a href="#6-Ninja提升编译速度方法" class="headerlink" title="6.Ninja提升编译速度方法"></a>6.Ninja提升编译速度方法</h2><h3 id="6-1编译分析"><a href="#6-1编译分析" class="headerlink" title="6.1编译分析"></a>6.1编译分析</h3><p>在每次启动编译的时候，soong都要重新收集所有的文件、.mk、.bp的修改，然后重新生成build.ninja，在合并成combined-aosp_arm.ninja，这要花费大量的时间。</p>
 <p>  如下图所示整个编译过程，准备过程非常冗长。</p>
-<p><img src="/img/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_9.jpg"></p>
+<p><img src="/images/2022-7-3Android%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91_9.png"></p>
 <pre><code>大部分情况下，研发的工作是不断的修改.c .h .cpp .java 然后增量，此时真正的编译工作是非常少的，这样相对而言，准备工作往往是占大头的，所以我们可以考虑舍弃combined-aosp_arm.ninja之前的准备过程。
 </code></pre>
 <h3 id="6-2-qninja提升编译速度"><a href="#6-2-qninja提升编译速度" class="headerlink" title="6.2 qninja提升编译速度"></a>6.2 qninja提升编译速度</h3><p>   根据上一节分析到，舍弃combined-aosp_arm.ninja的准备过程，直接指向ninja可以提升速率，因此我们可以开发一个快速的编译命令，来提升研发的编译效率。</p>
