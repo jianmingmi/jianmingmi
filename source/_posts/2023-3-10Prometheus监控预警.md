@@ -1,13 +1,22 @@
 ---
 uuid: e9f31910-bd5b-11ed-90c2-51c8d7306491
-title: Prometheus
+title: Prometheus监控预警
 date: 2023-3-10
 tags: [Linux]
 ---
 
-Prometheus
+Prometheus监控预警
 
 <!--more-->
+
+## zabbix与Prometheus对比
+1. zabbix诞生的 时间更早 ，是比Prometheus 更成熟 的监控软件。
+2. 不过受制于时间，Prometheus的 编制语言 也会比zabbix更加简洁。
+3. zabbix支持 图形化配置 ，让它在 本地计算机 上使用会更方便和快捷。
+4. 但是到了 云计算 上，由于需要 自动化 ，导致zabbix的图形化需要大量人力介入
+5. 在模型架构方面，zabbix采用了传统push模型，节省了人力拉取数据的时间。
+6. 不过同样的，这在本地计算机上是优势，而云计算由于数量众多，需要单独配置也极大地提高了使用难度。
+7. 总的来说， zabbix 更加适合用于 本地计算机 的监控，而 Prometheus 更适合在现在流行的 云计算 监控上使用。
 
 ## docker安装
 ```
@@ -128,4 +137,81 @@ sudo grafana-cli admin reset-admin-password "admin"（初始化admin密码）
 
 1.添加prometheus数据源
 2.添加仪表盘：9276（搜寻仪表盘：https://grafana.com/grafana/dashboards/9276-1-cpu/）
+```
+
+## Zabbix安装
+```
+文档
+    https://www.zabbix.com/
+    https://www.zabbix.com/documentation/6.2/en/manual/quickstart/login
+安装
+    vim docker-compose.yml
+        version: '3.7'
+        services:
+          mysql-server:
+            image: mysql:latest
+            environment:
+              MYSQL_ROOT_PASSWORD: password
+              MYSQL_USER: zabbix
+              MYSQL_PASSWORD: zabbix
+              MYSQL_DATABASE: zabbix
+            volumes:
+              - "/etc/localtime:/etc/localtime"
+              - "/home/docker/mysql:/var/lib/mysql"
+            ports:
+              - "3306:3306"
+            networks:
+              - zbx_net
+
+          zabbix-server:
+            image: zabbix/zabbix-server-mysql:centos-latest
+            environment:
+              DB_SERVER_HOST: mysql-server
+              MYSQL_DATABASE: zabbix
+              MYSQL_USER: zabbix
+              MYSQL_PASSWORD: zabbix
+            ports:
+              - "10051:10051"
+            depends_on:
+              - "mysql-server"
+            volumes:
+              - /etc/localtime:/etc/localtime:ro
+              - /etc/timezone:/etc/timezone:ro
+              - "zabbix:/var/lib/zabbix"
+            networks:
+              - zbx_net
+
+
+          zabbix-web:
+            image: zabbix/zabbix-web-nginx-mysql:latest
+            environment:
+              DB_SERVER_HOST: mysql-server
+              MYSQL_DATABASE: zabbix
+              MYSQL_USER: zabbix
+              MYSQL_PASSWORD: zabbix
+              PHP_TZ: Asia/Shanghai
+              ZBX_SERVER_HOST: zabbix-server
+            ports:
+              - 8088:8080
+            depends_on:
+              - mysql-server
+              - zabbix-server
+            networks:
+              - zbx_net
+
+          zabbix-agent:
+            image: zabbix/zabbix-agent:latest
+            environment:
+              ZBX_SERVER_HOST: zabbix-server
+            ports:
+             - "10050:10050"
+            depends_on:
+             - "zabbix-server"
+            networks:
+             - zbx_net
+
+        networks:
+         zbx_net:
+        volumes:
+          zabbix:
 ```
