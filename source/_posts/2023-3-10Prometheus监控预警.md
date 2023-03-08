@@ -2,7 +2,9 @@
 uuid: e9f31910-bd5b-11ed-90c2-51c8d7306491
 title: Prometheus监控预警
 date: 2023-3-10
-tags: [Linux]
+tags:
+  - Linux
+abbrlink: f1885250
 ---
 
 Prometheus监控预警

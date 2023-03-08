@@ -2,7 +2,9 @@
 uuid: 105c01e0-bcd3-11ed-abae-3fce2bc8128b
 title: Android基础
 date: 2016-6-5
-tags: [Android]
+tags:
+  - Android
+abbrlink: 1e23c015
 ---
 
 Android基础

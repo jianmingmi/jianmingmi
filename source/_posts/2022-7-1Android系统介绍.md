@@ -2,7 +2,9 @@
 uuid: 105c28f2-bcd3-11ed-abae-3fce2bc8128b
 title: Android系统介绍
 date: 2022-7-1
-tags: [Android]
+tags:
+  - Android
+abbrlink: b46e62ef
 ---
 
 Android系统介绍

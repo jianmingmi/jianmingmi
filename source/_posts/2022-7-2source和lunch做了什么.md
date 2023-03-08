@@ -2,7 +2,9 @@
 uuid: 105c28f6-bcd3-11ed-abae-3fce2bc8128b
 title: source和lunch做了什么
 date: 2022-7-2
-tags: [Android]
+tags:
+  - Android
+abbrlink: 8b3102e
 ---
 
 source和lunch做了什么

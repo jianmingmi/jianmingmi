@@ -2,7 +2,9 @@
 uuid: 105c28f7-bcd3-11ed-abae-3fce2bc8128b
 title: Android系统编译
 date: 2022-7-3
-tags: [Android]
+tags:
+  - Android
+abbrlink: 135a8f34
 ---
 
 Android系统编译
